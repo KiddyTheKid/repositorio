@@ -25,15 +25,17 @@
     <div class="container-fluid">
         <div class="divisor"></div>
         <p class="istok" style="text-align: center">Puedes buscar por tema, libro, area, enemas, etc.</p>
-        <div class="row justify-content-center">
-            <div class="form-group" style="width: 90%;">
-                <input type="text" class="form-control" id="busqueda" placeholder="Buscar lo que sea...">
+        <form id="index_form_busqueda_normal" action="core/php/funcs/index_funcs.php">
+            <div class="row justify-content-center">
+                <div class="form-group" style="width: 90%;">
+                    <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Buscar lo que sea...">
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <button id="index_boton_buscar" class="btn btn-dark" style="margin-right: 0.5em;">Buscar</button>
-            <button id="index_boton_bavanzada" class="btn btn-dark" style="margin-left: 0.5em;">Busqueda Avanzada</button>
-        </div>
+            <div class="row justify-content-center">
+                <button type="submit" id="index_boton_buscar" class="btn btn-dark" style="margin-right: 0.5em;">Buscar</button>
+                <button id="index_boton_bavanzada" class="btn btn-dark" style="margin-left: 0.5em;">Busqueda Avanzada</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -57,5 +59,7 @@
         </div>
     </div>
 </div>
+
+<div id="index_resultados"></div>
 </body>
 </html>
