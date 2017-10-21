@@ -1,10 +1,15 @@
 <script>
+    /*
+    1 = comboCarreras
+    2 = comboTipoDocumentos
+     */
     function admin(op) {
         switch (op){
             case 1:
                 addF("layout/admin_doc.html");
                 w3.includeHTML();
-                CargarCombosDocs();
+                CargarCombosDocs(1,"combo_carreras");
+                CargarCombosDocs(2,"combo_documentos");
                 break;
             case 2:
                 addF("layout/admin_usrs.html");
@@ -15,13 +20,13 @@
     function addF(a) {
         document.getElementById('op').setAttribute("w3-include-html",a);
     }
-    function CargarCombosDocs() {
+    function CargarCombosDocs(n,contenedor) {
         $.ajax({
             type: 'POST',
             url: 'core/php/funcs/combos.php',
-            data:{combo:1},
+            data:{combo:n},
             success: function (data) {
-                $("#combo_carreras").html(data);
+                $("#" + contenedor).html(data);
             }
         });
     }
