@@ -3,8 +3,15 @@
     1 = comboCarreras
     2 = comboTipoDocumentos
      */
+    $(function () {
+        admin(0);
+    })
     function admin(op) {
         switch (op){
+            case 0:
+                addF("layout/admin_home.html");
+                w3.includeHTML();
+                break;
             case 1:
                 addF("layout/admin_doc.html");
                 w3.includeHTML();
@@ -40,7 +47,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="admin(0);">Inicio<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,4 +63,5 @@
         </ul>
     </div>
 </nav>
+<br>
 <div id="op"></div>
