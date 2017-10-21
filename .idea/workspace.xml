@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f20b1290-f441-4cf5-9e71-cc818938ed71" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/admin_home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/admin_body.html" afterPath="$PROJECT_DIR$/layout/admin_body.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +36,8 @@
       <file leaf-file-name="admin_body.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/layout/admin_body.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="49" column="63" lean-forward="false" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
+            <state relative-caret-position="59">
+              <caret line="42" column="29" lean-forward="false" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -158,8 +156,8 @@
         <option value="$PROJECT_DIR$/layout/lss.php" />
         <option value="$PROJECT_DIR$/core/php/funcs/combos.php" />
         <option value="$PROJECT_DIR$/layout/admin_doc.html" />
-        <option value="$PROJECT_DIR$/layout/admin_body.html" />
         <option value="$PROJECT_DIR$/layout/admin_home.html" />
+        <option value="$PROJECT_DIR$/layout/admin_body.html" />
       </list>
     </option>
   </component>
@@ -349,16 +347,15 @@
       <workItem from="1508600400586" duration="70000" />
       <workItem from="1508600498285" duration="13393000" />
       <workItem from="1508617524562" duration="4738000" />
-      <workItem from="1508622643634" duration="1314000" />
+      <workItem from="1508622643634" duration="1792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40141000" />
+    <option name="totallyTimeSpent" value="40619000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="683" y="31" width="1372" height="740" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -721,8 +718,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/layout/admin_body.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="49" column="63" lean-forward="false" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
+        <state relative-caret-position="59">
+          <caret line="42" column="29" lean-forward="false" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
           <folding />
         </state>
       </provider>
