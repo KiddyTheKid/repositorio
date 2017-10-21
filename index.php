@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <!-- Boot Strap Css -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Fin -->
     <link rel="stylesheet" href="css/stuff.css">
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
 <div class="cabecera">
     <p class="cabecera-texto monda">L-REPO</p>
 </div>
-
+<!--  Busqueda normal -->
 <div id="index_inicio_normal">
     <div class="container-fluid">
         <div class="divisor"></div>
@@ -39,6 +39,7 @@
     </div>
 </div>
 
+<!-- Busqueda avanzada -->
 <div id="index_inicio_avanzado" style="display: none;">
     <div class="container-fluid">
         <div class="divisor"></div>
@@ -59,7 +60,7 @@
         </div>
     </div>
 </div>
-
-<div id="index_resultados"></div>
+<!-- Resultados de la busqueda -->
+<div class="container-fluid" id="index_resultados"></div>
 </body>
 </html>
