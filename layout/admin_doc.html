@@ -1,27 +1,33 @@
 <div class="container">
     <h1>Subir un documento</h1>
     <br>
-    <form>
-        <div class="form-group">
-            <div class="col-form-label">
-                <label>Tipo de trabajo</label>
+    <form id="admin_doc_sub">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <div class="col-form-label">
+                        <label>Tipo de trabajo</label>
+                    </div>
+                    <div id="combo_documentos"></div>
+                </div>
             </div>
-            <div id="combo_carreras"></div>
+            <div class="col">
+                <div class="form-group">
+                    <div class="col-form-label">
+                        <label>Especialidad</label>
+                    </div>
+                    <div id="combo_carreras"></div>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <div class="col-form-label">
-                <label>Especialidad</label>
+                <label for="ced_autor">Cédula de Autor</label>
             </div>
-            <div id="combo_documentos"></div>
+            <input id="ced_autor" name="ced_autor" type="text" class="form-control" placeholder="0931484620">
         </div>
         <div class="form-group">
-            <div class="col-form-label">
-                <label for="doc_subm">Cédula de Autor</label>
-            </div>
-            <input id="doc_subm" type="text" class="form-control" placeholder="Nombre del documento">
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-success float-right">
+            <input type="button" onclick="Exec(1,'admin_doc_sub');" class="btn btn-outline-dark btn-light" value="Subir Archivo">
         </div>
     </form>
 </div>

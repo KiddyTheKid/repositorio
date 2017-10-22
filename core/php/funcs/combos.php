@@ -6,7 +6,7 @@
  * Time: 15:48
  */
 include ("../data/con.php");
-echo '<select class="custom-select">';
+echo '<select class="custom-select" id="select_'.$_POST["id"].'" name="select_'.$_POST["id"].'">';
 switch ($_POST['combo']){
     case 1:
         comboCarreras($con);

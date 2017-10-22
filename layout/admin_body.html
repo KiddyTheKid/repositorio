@@ -15,8 +15,8 @@
             case 1:
                 addF("layout/admin_doc.html");
                 w3.includeHTML();
-                CargarCombosDocs(1,"combo_carreras");
-                CargarCombosDocs(2,"combo_documentos");
+                CargarCombosDocs(1,"combo_documentos");
+                CargarCombosDocs(2,"combo_carreras");
                 break;
             case 2:
                 addF("layout/admin_usrs.html");
@@ -31,17 +31,27 @@
         $.ajax({
             type: 'POST',
             url: 'core/php/funcs/combos.php',
-            data:{combo:n},
+            data:{combo:n,id:contenedor},
             success: function (data) {
                 $("#" + contenedor).html(data);
+            }
+        });
+    }
+    function Exec(accion,form) {
+        $.ajax({
+            type: 'POST',
+            url: 'core/php/funcs/admin_funcs.php',
+            data: $("#" + form).serialize() + "&accion=" + accion,
+            success: function (data) {
+                document.getElementById(form).reset();
+                $("#mensajes").html(data);
             }
         });
     }
 </script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        <img src="im/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        Repositorio
+        <img src="im/logo.png" width="330" height="100" class="d-inline-block float-left" alt="" style="max-width: 100%">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -60,7 +70,7 @@
                     <a class="dropdown-item" href="#" onclick="admin(1);">Subir Documentos</a>
                     <a class="dropdown-item" href="#" onclick="admin(2);">Usuarios</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>
@@ -68,3 +78,6 @@
 </nav>
 <br>
 <div id="op"></div>
+<div class="container">
+    <div id="mensajes"></div>
+</div>
