@@ -30,8 +30,11 @@ function Mensajero($nivel, $titulo, $mensaje){
         ';
 }
 function insertar($con){
+    if(isset($_FILES['archivo']['name'])){
+        guardarArchivo();
+    }
     if ($_POST['ced_autor'] != ""){
-        $sql = "INSERT INTO documentos (autor, tipo_doc, especialidad) VALUES ('".$_POST['ced_autor']."',".$_POST['select_combo_documentos'].",".$_POST['select_combo_carreras'].")";
+        $sql = "INSERT INTO documentos (autor, tipo_doc, especialidad, fecha_subida) VALUES ('".$_POST['ced_autor']."',".$_POST['select_combo_documentos'].",".$_POST['select_combo_carreras'].", NOW())";
     } else {
         $sql = "ERROR";
     }
@@ -41,5 +44,15 @@ function insertar($con){
         Mensajero(0,"Falló","Falló al ingresar documento, revise que los campos esten completamente llenos.");
     }
 }
+function eliminar($con){
 
+}
+function actualizar($con){
+
+}
+function guardarArchivo(){
+    $direccion = "../../../files/";
+    $dir_archivo = $direccion.basename($_FILES['archivo']['name']);
+    move_uploaded_file($_FILES['archivo']['tmp_name'], $dir_archivo);
+}
 ?>
