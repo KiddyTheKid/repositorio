@@ -19,8 +19,20 @@
                 CargarCombosDocs(2,"combo_carreras");
                 break;
             case 2:
+                addF("layout/admin_aut.html");
+                w3.includeHTML();
+                break;
+            case 3:
                 addF("layout/admin_usrs.html");
                 w3.includeHTML();
+                break;
+            case 4:
+                $.ajax({
+                    type: 'POST',
+                    url: 'core/php/funcs/admin_funcs.php',
+                    data: {accion:0}
+                });
+                window.location.href = window.location.href;
                 break;
         }
     }
@@ -94,15 +106,14 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#" onclick="admin(1);">Subir Documentos</a>
                     <a class="dropdown-item" href="#" onclick="admin(2);">Autores</a>
+                    <a class="dropdown-item" href="#" onclick="admin(3);">Usuarios</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                    <a class="dropdown-item" href="#" onclick="admin(4);">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
 <br>
+<div id="mensajes" class="container"></div>
 <div id="op"></div>
-<div class="container">
-    <div id="mensajes"></div>
-</div>

@@ -4,6 +4,7 @@
     <?php include("layout/head.html"); ?>
 </head>
 <body>
-<?php include("layout/admin_body.html"); ?>
+<?php session_start(); ?>
+<?php include("layout/land.html"); ?>
 </body>
 </html>
