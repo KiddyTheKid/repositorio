@@ -94,5 +94,6 @@ function insertarUsuario($con){
 function logout(){
     session_start();
     $_SESSION['logged'] = false;
+    session_destroy();
 }
 ?>
