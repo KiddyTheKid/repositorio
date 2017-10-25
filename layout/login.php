@@ -52,7 +52,7 @@ if(isset($_POST['user']) && $_POST['user'] != ""){
     $clave = $user_data[7];
     if($clave === $pass){
         $_SESSION['logged'] = true;
-        echo '<script>window.location.href = window.location.href;</script>';
+        echo '<script>window.location.href = "";</script>';
     }else{
         $_SESSION['logged'] = false;
     }
