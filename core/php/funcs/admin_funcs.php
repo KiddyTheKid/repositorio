@@ -5,6 +5,7 @@
  * Date: 21/10/17
  * Time: 22:07
  */
+session_start();
 include "../data/con.php";
 switch ($_POST['accion']){
     case 0:
@@ -19,6 +20,9 @@ switch ($_POST['accion']){
     case 3:
         insertarUsuario($con);
         break;
+    case 4:
+        updatePass($con);
+        break;
 }
 function Mensajero($nivel, $titulo, $mensaje){
     switch ($nivel){
@@ -27,6 +31,9 @@ function Mensajero($nivel, $titulo, $mensaje){
             break;
         case 1:
             $estado = "success";
+            break;
+        case 2:
+            $estado = "warning";
             break;
     }
     echo '
@@ -48,7 +55,7 @@ function insertarArchivo($con){
         $sql = "ERROR";
     }
     if(mysqli_query($con,$sql)){
-        Mensajero(1,"Exito","Exito al guardar el documento");
+        Mensajero(1,"Exito","Exito al guardar el documento.");
     }else{
         Mensajero(0,"Falló","Falló al ingresar documento, revise que los campos esten completamente llenos.");
     }
@@ -91,9 +98,32 @@ function insertarUsuario($con){
         Mensajero(0,"Fallido","Error al crear el usuario.");
     }
 }
+function updatePass($con){
+    $verifSql = "SELECT password FROM usuarios WHERE cedula = '".$_SESSION['usuario_actual']['cedula']."'";
+    $verifRes = mysqli_query($con,$verifSql);
+    $verifRes = $verifRes->fetch_row();
+    $verifRes = $verifRes[0];
+    $sql = "UPDATE usuarios SET password = '".md5($_POST['pw_nuevo'])."' WHERE cedula = '".$_SESSION['usuario_actual']['cedula']."'";
+    if ($_POST['pw_nuevo'] == "" || $_POST['pw_confirm'] == ""){
+        Mensajero(2,"Aténcion!","Lo nueva contraseña no puede estar vacia.");
+        exit();
+    }
+    if ($_POST['pw_nuevo'] == $_POST['pw_confirm']){
+        if (md5($_POST['pw_anterior']) ==  $verifRes){
+            if (mysqli_query($con,$sql)){
+                Mensajero(1,"Exito","Contraseña Actualizada con exito.");
+            } else {
+                Mensajero(0,"Falló","Fallo al cambiar la contraseña.");
+            }
+        } else {
+            Mensajero(0,"Verificar","La contraseña anterior es incorrecta.");
+        }
+    } else {
+        Mensajero(0,"Contraseñas","La contraseña nueva no coincide.");
+    }
+
+}
 function logout(){
-    session_start();
-    $_SESSION['logged'] = false;
     session_destroy();
 }
 ?>

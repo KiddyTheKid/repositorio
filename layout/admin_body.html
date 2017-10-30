@@ -9,35 +9,42 @@
     function admin(op) {
         switch (op){
             case 0:
-                addF("layout/admin_home.html");
+                addF("admin_home.html");
                 w3.includeHTML();
                 break;
             case 1:
-                addF("layout/admin_doc.html");
-                w3.includeHTML();
-                CargarCombosDocs(1,"combo_documentos");
-                CargarCombosDocs(2,"combo_carreras");
+                addF("admin_doc.html");
+                w3.includeHTML(function () {
+                    CargarCombosDocs(1,'combo_documentos');
+                    CargarCombosDocs(2,'combo_carreras');
+                });
                 break;
             case 2:
-                addF("layout/admin_aut.html");
+                addF("admin_aut.html");
                 w3.includeHTML();
                 break;
             case 3:
-                addF("layout/admin_usrs.html");
+                addF("admin_usrs.html");
                 w3.includeHTML();
                 break;
             case 4:
                 $.ajax({
                     type: 'POST',
                     url: 'core/php/funcs/admin_funcs.php',
-                    data: {accion:0}
+                    data: {accion:0},
+                    success: function () {
+                        window.location.href = "";
+                    }
                 });
-                window.location.href = window.location.href;
+                break;
+            case 5:
+                addF("admin_changepass.html");
+                w3.includeHTML();
                 break;
         }
     }
     function addF(a) {
-        document.getElementById('op').setAttribute("w3-include-html",a);
+        document.getElementById('op').setAttribute("w3-include-html","layout/" + a);
     }
     function CargarCombosDocs(n,contenedor) {
         $.ajax({
@@ -85,6 +92,17 @@
             });
         }
     }
+    function adChangePW() {
+        $.ajax({
+            type: 'POST',
+            url: 'core/php/funcs/admin_funcs.php',
+            data: $("#admin_changepass_form").serialize() + "&accion=4",
+            success: function (data) {
+                document.getElementById('admin_changepass_form').reset();
+                $("#mensajes").html(data);
+            }
+        });
+    }
 </script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
@@ -104,16 +122,17 @@
                     Administrar
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#" onclick="admin(1);">Subir Documentos</a>
-                    <a class="dropdown-item" href="#" onclick="admin(2);">Autores</a>
-                    <a class="dropdown-item" href="#" onclick="admin(3);">Usuarios</a>
+                    <a class="dropdown-item" href="javascript:admin(1)">Subir Documentos</a>
+                    <a class="dropdown-item" href="javascript:admin(2);">Autores</a>
+                    <a class="dropdown-item" href="javascript:admin(3);">Usuarios</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" onclick="admin(4);">Cerrar Sesión</a>
+                    <a class="dropdown-item" href="javascript:admin(5);">Cambiar mi contraseña</a>
+                    <a class="dropdown-item" href="javascript:admin(4);">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
 <br>
-<div id="mensajes" class="container"></div>
+<div id="mensajes" class="container-fluid"></div>
 <div id="op"></div>

@@ -46,13 +46,20 @@ if(isset($_POST['user']) && $_POST['user'] != ""){
     $ced = mysqli_real_escape_string($con,$_POST['user']);
     $pass = mysqli_real_escape_string($con,$_POST['pass']);
     $pass = md5($pass);
-    $sql = "SELECT * FROM usuarios WHERE cedula = '".$ced."'";
+    $sql = "SELECT nombres, apellidos, correo, password, nivel FROM usuarios WHERE cedula = '".$ced."'";
     $res = mysqli_query($con,$sql);
     $user_data = $res->fetch_row();
-    $clave = $user_data[7];
+    $clave = $user_data[3];
     if($clave === $pass){
         $_SESSION['logged'] = true;
-        echo '<script>window.location.href = "";</script>';
+        $_SESSION['usuario_actual'] = array(
+            "cedula"=>$ced,
+            "nombres"=>$user_data[0],
+            "apellidos"=>$user_data[1],
+            "correo"=>$user_data[2],
+            "nivel"=>$user_data[4]
+        );
+        echo '<script> window.location.href = "";</script>';
     }else{
         $_SESSION['logged'] = false;
     }

@@ -5,6 +5,6 @@
 </head>
 <body>
 <?php session_start(); ?>
-<?php include("layout/land.html"); ?>
+<?php include("layout/login.php"); ?>
 </body>
 </html>
