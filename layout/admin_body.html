@@ -17,6 +17,7 @@
                 w3.includeHTML(function () {
                     CargarCombosDocs(1,'combo_documentos');
                     CargarCombosDocs(2,'combo_carreras');
+                    CargarListaDocs(1, 'lista_autores','ced_autor');
                 });
                 break;
             case 2:
@@ -53,6 +54,16 @@
             data:{combo:n,id:contenedor},
             success: function (data) {
                 $("#" + contenedor).html(data);
+            }
+        });
+    }
+    function CargarListaDocs(n,contenedor,c){
+        $.ajax({
+            type: 'POST',
+            url: 'core/php/funcs/listas.php',
+            data:{lista:n,id:n+contenedor,campo:c},
+            success: function (data) {
+                $("#"+ contenedor).html(data);
             }
         });
     }

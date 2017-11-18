@@ -5,6 +5,9 @@
  * Date: 19/10/17
  * Time: 21:14
  */
+
+define("RUTA_DOCUMENTOS","/opt/lampp/htdocs/repoFiles/");
+
 define("HOST","localhost");
 define("USER","pcost8300");
 define("PASS","megamanzero001");

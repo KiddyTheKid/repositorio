@@ -67,8 +67,10 @@ function actualizar($con){
 
 }
 function guardarArchivo(){
-    $direccion = "../../../files/";
-    $dir_archivo = $direccion.basename($_FILES['archivo']['name']);
+    $direccion = RUTA_DOCUMENTOS;
+    $ext = pathinfo($_FILES['archivo']['name'], PATHINFO_EXTENSION);
+    $fecha =  date("Y-M-Dhis");
+    $dir_archivo = $direccion.basename($fecha.$ext);
     move_uploaded_file($_FILES['archivo']['tmp_name'], $dir_archivo);
 }
 function insertarAutor($con){
@@ -77,6 +79,10 @@ function insertarAutor($con){
     } else {
         $sql = "INSERT INTO autores (cedula, nombres, apellidos, correo, telefono, direccion) ";
         $sql = $sql."VALUES ('".$_POST['cedula']."', '".$_POST['nombres']."', '".$_POST['apellidos']."', '".$_POST['email']."', '".$_POST['telf']."', '".$_POST['direccion']."')";
+    }
+    if (existeAutor($con)){
+        Mensajero(0,"Error","El autor ya existe.");
+        exit();
     }
     if (mysqli_query($con,$sql)){
         Mensajero(1,"Exito","El autor fue creado con exito");
@@ -90,7 +96,7 @@ function insertarUsuario($con){
     } else {
         $pass = md5($_POST['cedula']);
         $sql = "INSERT INTO usuarios (cedula, nombres, apellidos, correo, telefono, direccion, password, nivel) ";
-        $sql = $sql."VALUES ('".$_POST['cedula']."', '".$_POST['nombres']."', '".$_POST['apellidos']."', '".$_POST['email']."', '".$_POST['telf']."', '".$_POST['direccion']."', '".$pass."', 0)";
+        $sql = $sql . "VALUES ('" . $_POST['cedula'] . "', '" . $_POST['nombres'] . "', '" . $_POST['apellidos'] . "', '" . $_POST['email'] . "', '" . $_POST['telf'] . "', '" . $_POST['direccion'] . "', '" . $pass . "', 0)";
     }
     if (mysqli_query($con,$sql)){
         Mensajero(1,"Exito","El usuario fue creado con exito");
@@ -122,6 +128,15 @@ function updatePass($con){
         Mensajero(0,"Contraseñas","La contraseña nueva no coincide.");
     }
 
+}
+function existeAutor($con){
+    $sql = "SELECT * FROM autores where cedula = '".$_POST['cedula']."'";
+    $res = mysqli_query($con,$sql);
+    if($res->num_rows === 0){
+        return false;
+    } else {
+        return true;
+    }
 }
 function logout(){
     session_destroy();
