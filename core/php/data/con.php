@@ -6,7 +6,8 @@
  * Time: 21:14
  */
 
-define("RUTA_DOCUMENTOS","/opt/lampp/htdocs/repoFiles/");
+//define("RUTA_DOCUMENTOS","/opt/lampp/htdocs/repoFiles/");
+define("RUTA_DOCUMENTOS", "/var/www/html/repoFiles/");
 
 define("HOST","localhost");
 define("USER","pcost8300");

@@ -1,4 +1,15 @@
-<?php if(!isset($_SESSION['logged']) || $_SESSION['logged'] == false): ?>
+<script>
+    function cancelar() {
+        $.ajax({
+            type: 'POST',
+            url: 'core/php/funcs/admin_funcs.php',
+            data: {accion:0},
+            success: function () {
+                window.location.href = "";
+            }
+        });
+    }
+</script>
     <br>
     <div class="container">
         <div class="jumbotron">
@@ -27,19 +38,16 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="form-group">
+                    <div class="form-group" style="padding-right: 2em">
                         <input type="submit" class="btn btn-light btn-outline-dark" value="Ingresar">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-light btn-outline-dark" onclick="cancelar()" value="Cancelar">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-<?php endif; ?>
-<?php
-if(isset($_SESSION['logged']) && $_SESSION['logged'] == true):
-    include("layout/admin_body.html");
-endif;
-?>
 <?php
 if(isset($_POST['user']) && $_POST['user'] != ""){
     include("core/php/data/con.php");

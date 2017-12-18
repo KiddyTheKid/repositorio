@@ -45,9 +45,25 @@ function Mensajero($nivel, $titulo, $mensaje){
         </div>
         ';
 }
-function insertarArchivo($con){
+function insertarArchivo($con)
+{
+    $cedula = $_POST['ced_autor'];
+    $tipoDoc = $_POST['select_combo_documentos'];
+    $especialidad = $_POST['select_combo_carreras'];
+    $etiquetas = $_POST['etiquetas'];
+    $nombreAutor = buscarNombres($con, $cedula);
+    $tema = $_POST['tema'];
+    //Preparar etiquetas
+    $nTema = preg_replace('!\s+!', ', ', $tema);
+    $nombreAutor = preg_replace('!\s+!', ', ', $nombreAutor);
+    $prep = $nombreAutor.", ".$nTema . ", " . $etiquetas;
+    $nEtiquetas = preg_replace('!\s+!', ' ', $prep);
+    $metaArreglo = explode(",", $nEtiquetas);
+    //$metaData = convertirMeta($metaArreglo);
+    $metaData = convertirSinMeta($metaArreglo);
     if ($_POST['ced_autor'] != ""){
-        $sql = "INSERT INTO documentos (autor, tipo_doc, especialidad, fecha_subida) VALUES ('".$_POST['ced_autor']."',".$_POST['select_combo_documentos'].",".$_POST['select_combo_carreras'].", NOW())";
+        $sql = "INSERT INTO documentos (autor, tipo_doc, especialidad, fecha_subida, etiquetas, metaetiquetas, tema) 
+VALUES ('$cedula', $tipoDoc, $especialidad, NOW(), '$etiquetas', '$metaData', '$tema')";
         if(isset($_FILES['archivo']['name'])){
             guardarArchivo();
         }
@@ -140,5 +156,26 @@ function existeAutor($con){
 }
 function logout(){
     session_destroy();
+}
+function convertirMeta($data){
+    $respuesta = array();
+    foreach ($data as $datum){
+        $respuesta[] = metaphone($datum);
+    }
+    return join(" ", $respuesta);
+}
+function convertirSinMeta($data){
+    $respuesta = array();
+    foreach ($data as $datum){
+        $respuesta[] = $datum;
+    }
+    return join("", $respuesta);
+}
+function buscarNombres($con, $cedula){
+    $sql = "SELECT nombres, apellidos FROM autores WHERE cedula = '$cedula'";
+    $resp = mysqli_query($con, $sql);
+    $fila = $resp->fetch_row();
+    $nombrs = $fila[0]." ".$fila[1];
+    return $nombrs;
 }
 ?>
