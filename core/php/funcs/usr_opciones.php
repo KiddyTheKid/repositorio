@@ -5,7 +5,8 @@
  * Date: 17/12/17
  * Time: 16:46
  */
-include "core/php/data/con.php";
+$ruta = dirname(dirname(__FILE__));
+include "$ruta/data/con.php";
 function cargarTiposDocs(){
     global $con;
     $sql = "SELECT * FROM tipos_documentos";

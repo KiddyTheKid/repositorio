@@ -1,5 +1,6 @@
 <?php
-include "core/php/funcs/usr_opciones.php";
+$ruta = dirname(dirname(__FILE__));
+include "$ruta/core/php/funcs/usr_opciones.php";
 ?>
 <br>
 <div id="busquedaAvanzada" class="container-fluid" style="display: none">

@@ -50,7 +50,8 @@
     </div>
 <?php
 if(isset($_POST['user']) && $_POST['user'] != ""){
-    include("core/php/data/con.php");
+    $ruta = dirname(dirname(__FILE__));
+    require_once "$ruta/core/php/data/con.php";
     $ced = mysqli_real_escape_string($con,$_POST['user']);
     $pass = mysqli_real_escape_string($con,$_POST['pass']);
     $pass = md5($pass);

@@ -6,7 +6,8 @@
  * Time: 22:07
  */
 session_start();
-include "../data/con.php";
+$ruta = dirname(dirname(__FILE__));
+include "$ruta/data/con.php";
 switch ($_POST['accion']){
     case 0:
         logout();
