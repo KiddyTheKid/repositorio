@@ -88,7 +88,7 @@
     }
     function ExecFile(accion, form, archivo) {
         var file = $("#" + archivo)[0].files;
-        if(file.length == 0){
+        if(file.length === 0){
             alert("No ha seleccionado archivo");
         } else {
             var fd = new FormData();

@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f20b1290-f441-4cf5-9e71-cc818938ed71" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/admin_addesp.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layout/admin_addtdoc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/php/funcs/admin_funcs.php" afterPath="$PROJECT_DIR$/core/php/funcs/admin_funcs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/php/funcs/usr_opciones.php" afterPath="$PROJECT_DIR$/core/php/funcs/usr_opciones.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/admin_aut.html" afterPath="$PROJECT_DIR$/layout/admin_aut.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/admin_body.html" afterPath="$PROJECT_DIR$/layout/admin_body.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/admin_changepass.html" afterPath="$PROJECT_DIR$/layout/admin_changepass.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/admin_doc.html" afterPath="$PROJECT_DIR$/layout/admin_doc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/admin_home.html" afterPath="$PROJECT_DIR$/layout/admin_home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/admin_usrs.html" afterPath="$PROJECT_DIR$/layout/admin_usrs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/login.php" afterPath="$PROJECT_DIR$/layout/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layout/user_body.php" afterPath="$PROJECT_DIR$/layout/user_body.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,24 +47,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="admin_body.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="admin_body.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/layout/admin_body.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1398">
-              <caret line="148" column="56" lean-forward="true" selection-start-line="148" selection-start-column="56" selection-end-line="148" selection-end-column="56" />
+            <state relative-caret-position="-366">
+              <caret line="92" column="16" lean-forward="true" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/layout/login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="954">
-              <caret line="53" column="47" lean-forward="false" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
-              <folding>
-                <marker date="1514236093279" expanded="true" signature="2245:2335" ph="SELECT nombr... usuarios" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -141,7 +117,6 @@
         <option value="$PROJECT_DIR$/core/php/funcs/admin_funcs.php" />
         <option value="$PROJECT_DIR$/layout/user_body.php" />
         <option value="$PROJECT_DIR$/layout/login.php" />
-        <option value="$PROJECT_DIR$/layout/admin_body.html" />
         <option value="$PROJECT_DIR$/layout/admin_addesp.html" />
         <option value="$PROJECT_DIR$/layout/admin_addtdoc.html" />
         <option value="$PROJECT_DIR$/layout/admin_changepass.html" />
@@ -149,6 +124,7 @@
         <option value="$PROJECT_DIR$/layout/admin_home.html" />
         <option value="$PROJECT_DIR$/layout/admin_usrs.html" />
         <option value="$PROJECT_DIR$/layout/admin_aut.html" />
+        <option value="$PROJECT_DIR$/layout/admin_body.html" />
       </list>
     </option>
   </component>
@@ -379,16 +355,23 @@
       <workItem from="1509299821694" duration="6531000" />
       <workItem from="1511024078067" duration="8211000" />
       <workItem from="1513478634730" duration="32720000" />
-      <workItem from="1514234546755" duration="3198000" />
+      <workItem from="1514234546755" duration="3318000" />
     </task>
+    <task id="LOCAL-00001" summary="Modulos para agregar carreras y tipos de documentos">
+      <created>1514237782332</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1514237782333</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122403000" />
+    <option name="totallyTimeSpent" value="122523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2489019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -453,6 +436,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modulos para agregar carreras y tipos de documentos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modulos para agregar carreras y tipos de documentos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -646,14 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/layout/admin_body.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1398">
-          <caret line="148" column="56" lean-forward="true" selection-start-line="148" selection-start-column="56" selection-end-line="148" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/layout/admin_addtdoc.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -725,6 +704,14 @@
           <folding>
             <marker date="1514236093279" expanded="true" signature="2245:2335" ph="SELECT nombr... usuarios" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layout/admin_body.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-366">
+          <caret line="92" column="16" lean-forward="true" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
