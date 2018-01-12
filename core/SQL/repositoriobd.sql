@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.6
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 18-11-2017 a las 18:26:02
--- Versión del servidor: 10.1.28-MariaDB
--- Versión de PHP: 7.1.11
+-- Host: localhost
+-- Generation Time: Jan 12, 2018 at 08:10 PM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `repositoriobd`
+-- Database: `repositoriobd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `autores`
+-- Table structure for table `autores`
 --
 
 CREATE TABLE `autores` (
@@ -39,7 +39,7 @@ CREATE TABLE `autores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `autores`
+-- Dumping data for table `autores`
 --
 
 INSERT INTO `autores` (`id`, `cedula`, `nombres`, `apellidos`, `correo`, `telefono`, `direccion`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `autores` (`id`, `cedula`, `nombres`, `apellidos`, `correo`, `telefo
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `carreras`
+-- Table structure for table `carreras`
 --
 
 CREATE TABLE `carreras` (
@@ -57,7 +57,7 @@ CREATE TABLE `carreras` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `carreras`
+-- Dumping data for table `carreras`
 --
 
 INSERT INTO `carreras` (`id`, `descripcion`) VALUES
@@ -67,7 +67,7 @@ INSERT INTO `carreras` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `documentos`
+-- Table structure for table `documentos`
 --
 
 CREATE TABLE `documentos` (
@@ -75,13 +75,16 @@ CREATE TABLE `documentos` (
   `autor` text,
   `tipo_doc` int(11) DEFAULT NULL,
   `especialidad` int(11) DEFAULT NULL,
-  `fecha_subida` date DEFAULT NULL
+  `fecha_subida` date DEFAULT NULL,
+  `etiquetas` varchar(3000) NOT NULL,
+  `metaetiquetas` varchar(3000) NOT NULL,
+  `tema` varchar(3000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipos_documentos`
+-- Table structure for table `tipos_documentos`
 --
 
 CREATE TABLE `tipos_documentos` (
@@ -90,7 +93,7 @@ CREATE TABLE `tipos_documentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tipos_documentos`
+-- Dumping data for table `tipos_documentos`
 --
 
 INSERT INTO `tipos_documentos` (`id`, `descripcion`) VALUES
@@ -100,7 +103,7 @@ INSERT INTO `tipos_documentos` (`id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -116,76 +119,76 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `cedula`, `nombres`, `apellidos`, `correo`, `telefono`, `direccion`, `password`, `nivel`) VALUES
 (1, '0931484620', 'Pedro', 'Acosta', 'pcost8300@gmail.com', '093148460', 'pp', 'fd76520107ec5ce77e2e83667d80f2ae', 0);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `autores`
+-- Indexes for table `autores`
 --
 ALTER TABLE `autores`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indices de la tabla `carreras`
+-- Indexes for table `carreras`
 --
 ALTER TABLE `carreras`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indices de la tabla `documentos`
+-- Indexes for table `documentos`
 --
 ALTER TABLE `documentos`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indices de la tabla `tipos_documentos`
+-- Indexes for table `tipos_documentos`
 --
 ALTER TABLE `tipos_documentos`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `autores`
+-- AUTO_INCREMENT for table `autores`
 --
 ALTER TABLE `autores`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `carreras`
+-- AUTO_INCREMENT for table `carreras`
 --
 ALTER TABLE `carreras`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `documentos`
+-- AUTO_INCREMENT for table `documentos`
 --
 ALTER TABLE `documentos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tipos_documentos`
+-- AUTO_INCREMENT for table `tipos_documentos`
 --
 ALTER TABLE `tipos_documentos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
