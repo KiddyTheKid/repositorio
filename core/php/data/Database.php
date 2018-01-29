@@ -1,16 +1,8 @@
 <?php
 /**
- *@RUTA_DOCUMENTOS
- *Aqui se debe cambiar la ubicacion dependiendo del equipo servidor
- *si es un sistema windows obviamente se usara C:/direccion_carpeta
+ *Para modificar el acceso a la base de datos
+ *edite el archivo configuracion.json
  */
-/*
-define("RUTA_DOCUMENTOS", "/opt/lampp/htdocs/repoFiles/");
-define("HOST","localhost");
-define("USER","pcost8300");
-define("PASS","megamanzero001");
-define("DB","repositoriobd");
-*/
 $ruta = dirname(dirname(__FILE__));
 $config = $ruta."/../../configuracion.json";
 $config = file_get_contents($config);

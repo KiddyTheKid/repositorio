@@ -1,0 +1,7 @@
+{
+  "ubicacion_documentos":"/opt/lampp/htdocs/repoFiles/",
+  "servidor":"localhost",
+  "usuario_de_bd":"pcost8300",
+  "contrasena_bd":"megamanzero001",
+  "base_de_datos":"repositoriobd"
+}
