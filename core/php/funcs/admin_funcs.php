@@ -48,17 +48,17 @@ function insertarArchivo()
     $nEtiquetas = preg_replace('!\s+!', ' ', $prep);
     $metaArreglo = explode(",", $nEtiquetas);
     $metaData = convertirSinMeta($metaArreglo);
-
+    $doc->etiquetas = $metaData;
     $doc->metaetiquetas = $metaData;
     $doc->ruta = (isset($_FILES['archivo'])) ?
     Archivos::guardar($_FILES['archivo']) : exit();
-    
+
     Documentos::guardar($doc);
 }
 function insertarTipoDoc()
 {
 	$tipoDoc = new TiposDocumentos();
-	$tipoDoc->descripcion = (isset($_POST['tDoc']) && $_POST['tDoc'] != "") 
+	$tipoDoc->descripcion = (isset($_POST['tDoc']) && $_POST['tDoc'] != "")
 	? $_POST['tDoc'] : exit();
 	TiposDocumentos::guardar($tipoDoc);
 }
@@ -143,7 +143,7 @@ function convertirSinMeta($data){
     foreach ($data as $datum){
         $respuesta[] = $datum;
     }
-    return join("", $respuesta);
+    return join(" ", $respuesta);
 }
 function buscarNombres($con, $cedula){
     $sql = "SELECT nombres, apellidos FROM autores WHERE cedula = '$cedula'";

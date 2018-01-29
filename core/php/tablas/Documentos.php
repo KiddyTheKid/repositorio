@@ -14,15 +14,6 @@ class Documentos{
     }
     public static function buscarDocumento($sDoc)
     {
-        $preparar = preg_replace('!\s+!', ' ', $sDoc->tema);
-        $qEx = explode(" ", $preparar);
-        $newQex = array();
-        foreach ($qEx as $ex){
-            if ($ex != ""){
-                $newQex[] = trim($ex);
-            }
-        }
-
         $params = "";
         $params .= Parametros::agregarParametro($sDoc->especialidad,
         "doc.especialidad");
@@ -31,15 +22,16 @@ class Documentos{
         $params .= Parametros::agregarParametro($sDoc->fecha_subida,
         "doc.fecha_subida");
 
-        $busqueda = join("%' OR metaetiquetas LIKE '%", $newQex);
         $sql = "SELECT
         concat(aut.nombres, ' ', aut.apellidos),
         doc.tema, doc.fecha_subida
         FROM documentos as doc
         INNER JOIN autores as aut
         ON doc.autor = aut.cedula
-        WHERE metaetiquetas LIKE '%$busqueda%'
+        WHERE MATCH (doc.tema, doc.etiquetas)
+        AGAINST ('$sDoc->tema' IN NATURAL LANGUAGE MODE)
         $params";
+        
         $resultado = Database::Execute($sql);
         while ($row = $resultado->fetch_row()){
             $doc = new Documentos();

@@ -1,8 +1,4 @@
 <script>
-    /*
-    1 = comboCarreras
-    2 = comboTipoDocumentos
-     */
     $(function () {
         admin(0);
     })
@@ -50,26 +46,6 @@
     }
     function addF(a) {
         document.getElementById('op').setAttribute("w3-include-html","layout/" + a);
-    }
-    function CargarCombosDocs(n,contenedor) {
-        $.ajax({
-            type: 'POST',
-            url: 'core/php/funcs/combos.php',
-            data:{combo:n,id:contenedor},
-            success: function (data) {
-                $("#" + contenedor).html(data);
-            }
-        });
-    }
-    function CargarListaDocs(n,contenedor,c){
-        $.ajax({
-            type: 'POST',
-            url: 'core/php/funcs/listas.php',
-            data:{lista:n,id:n+contenedor,campo:c},
-            success: function (data) {
-                $("#"+ contenedor).html(data);
-            }
-        });
     }
     function Exec(accion,form) {
         $.ajax({
