@@ -9,7 +9,9 @@ class Cartero{
         <div class="card-body">
         <strong>'.$documento->tema.'</strong>
         <br>Por: '.$documento->autor.'
-        <br>Subido en: '.$documento->fecha_subida.'
+        <br>Trabajo: '.$documento->tipo_doc.'
+        Carrera: '.$documento->especialidad.'
+        <br>Creado: '.$documento->fecha_subida.'
         </div>
         </div>
         </a>
