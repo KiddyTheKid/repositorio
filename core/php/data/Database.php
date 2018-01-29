@@ -7,6 +7,7 @@ $ruta = dirname(dirname(__FILE__));
 $config = $ruta."/../../configuracion.json";
 $config = file_get_contents($config);
 $config = json_decode($config);
+
 define("RUTA_DOCUMENTOS", $config->{'ubicacion_documentos'});
 define("HOST", $config->{'servidor'});
 define("USER", $config->{'usuario_de_bd'});
