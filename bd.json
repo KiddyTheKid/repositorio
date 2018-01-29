@@ -1,0 +1,34 @@
+{
+    "petShop":
+    [
+        {"productos":
+            {
+                "id":1,
+                "descripcion":"SHAMPOO",
+                "linea":1,
+                "costo":2.50
+            }
+        },
+        {"lineas":
+            {
+                "id":1,
+                "descripcion":"BANIO"
+            }
+        },
+        {"clientes":
+            {
+                "id":1,
+                "cedula":"09312545",
+                "nombres":"Nombres",
+                "apellidos":"apellidos",
+                "correo":"asd@core.com",
+                "celular":"0931425485"
+            }
+        },
+        {"inventario":
+            {
+                "id":"id transaccion"
+            }
+        }
+    ]
+}
