@@ -3,7 +3,8 @@ class Cartero{
     public static function crearTarjeta($documento)
     {
         echo '
-        <a href="../repoFiles/'.$documento->ruta.'">
+        <a href="../repoFiles/'.$documento->ruta.'"
+        style="text-decoration:none; color: black;">
         <div class="card">
         <div class="card-body">
         <strong>'.$documento->tema.'</strong>
