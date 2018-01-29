@@ -11,12 +11,15 @@ define("USER","pcost8300");
 define("PASS","megamanzero001");
 define("DB","repositoriobd");
 */
-
-define("RUTA_DOCUMENTOS", "C:/xampp/htdocs/repoFiles/");
-define("HOST","localhost");
-define("USER","root");
-define("PASS","Sebas081120");
-define("DB","repositoriobd");
+$ruta = dirname(dirname(__FILE__));
+$config = $ruta."/../../configuracion.json";
+$config = file_get_contents($config);
+$config = json_decode($config);
+define("RUTA_DOCUMENTOS", $config->{'ubicacion_documentos'});
+define("HOST", $config->{'servidor'});
+define("USER", $config->{'usuario_de_bd'});
+define("PASS", $config->{'contrasena_bd'});
+define("DB", $config->{'base_de_datos'});
 
 class Database{
     public static function Execute($sql)
