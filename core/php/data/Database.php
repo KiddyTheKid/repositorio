@@ -12,7 +12,7 @@ define("PASS","megamanzero001");
 define("DB","repositoriobd");
 */
 
-define("RUTA_DOCUMENTOS", "C:/files/");
+define("RUTA_DOCUMENTOS", "C:/xampp/htdocs/repoFiles/");
 define("HOST","localhost");
 define("USER","root");
 define("PASS","Sebas081120");

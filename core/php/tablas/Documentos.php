@@ -24,20 +24,21 @@ class Documentos{
 
         $sql = "SELECT
         concat(aut.nombres, ' ', aut.apellidos),
-        doc.tema, doc.fecha_subida
+        doc.tema, doc.fecha_subida, doc.ruta
         FROM documentos as doc
         INNER JOIN autores as aut
         ON doc.autor = aut.cedula
         WHERE MATCH (doc.tema, doc.etiquetas)
         AGAINST ('$sDoc->tema' IN NATURAL LANGUAGE MODE)
         $params";
-        
+
         $resultado = Database::Execute($sql);
         while ($row = $resultado->fetch_row()){
             $doc = new Documentos();
             $doc->autor = $row[0];
             $doc->tema = $row[1];
             $doc->fecha_subida = $row[2];
+            $doc->ruta = $row[3];
             Cartero::crearTarjeta($doc);
         }
     }

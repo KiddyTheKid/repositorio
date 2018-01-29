@@ -51,7 +51,7 @@ function insertarArchivo()
     $doc->etiquetas = $metaData;
     $doc->metaetiquetas = $metaData;
     $doc->ruta = (isset($_FILES['archivo'])) ?
-    Archivos::guardar($_FILES['archivo']) : exit();
+    Archivos::guardar($_FILES['archivo'], $doc) : exit();
 
     Documentos::guardar($doc);
 }

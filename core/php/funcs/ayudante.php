@@ -3,6 +3,7 @@ class Cartero{
     public static function crearTarjeta($documento)
     {
         echo '
+        <a href="../repoFiles/'.$documento->ruta.'">
         <div class="card">
         <div class="card-body">
         <strong>'.$documento->tema.'</strong>
@@ -10,6 +11,7 @@ class Cartero{
         <br>Subido en: '.$documento->fecha_subida.'
         </div>
         </div>
+        </a>
         ';
     }
     public static function crearMensaje($nivel, $titulo, $mensaje)
@@ -61,13 +63,21 @@ class Parametros{
     }
 }
 class Archivos{
-    public static function guardar($archivo){
-        $direccion = RUTA_DOCUMENTOS;
+    public static function guardar($archivo, $docData){
+        $carrera = Carreras::buscarPorId($docData->especialidad);
+        $tipoDoc = TiposDocumentos::buscarPorId($docData->tipo_doc);
+        $direccion = RUTA_DOCUMENTOS.$carrera->descripcion."/";
+        $direccion .= $tipoDoc->descripcion."/";
+        if (!file_exists($direccion))
+        {
+            mkdir($direccion, 0777, true);
+        }
+        $nombreArchivo = $carrera->descripcion."/".$tipoDoc->descripcion."/";
+        $nombreArchivo .= $docData->autor.$archivo['name'];
         $ext = pathinfo($archivo['name'], PATHINFO_EXTENSION);
-        $fecha =  date("Y-M-Dhis");
-        $dir_archivo = $direccion.basename($fecha.".".$ext);
+        $dir_archivo = $direccion.basename($docData->autor.$archivo['name']);
         move_uploaded_file($archivo['tmp_name'], $dir_archivo);
-        return $dir_archivo;
+        return $nombreArchivo;
     }
 }
 class TablasHTML{

@@ -40,7 +40,7 @@ class TiposDocumentos{
 		}
 		return $data;
 	}
-	public static function buscarPodId($id)
+	public static function buscarPorId($id)
 	{
 		$sql = "SELECT * FROM tipos_documentos WHERE id = $id";
 		$data = Database::Execute($sql)->fetch_row();
