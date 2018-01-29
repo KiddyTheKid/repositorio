@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h4>Cambiar contraseña</h4>
+        <br>
+        <form id="admin_changepass_form" action="javascript:adChangePw()">
+            <div class="form-group">
+                <label for="pw_anterior">Contraseña anterior</label>
+                <input type="password" class="form-control" id="pw_anterior" name="pw_anterior">
+            </div>
+            <div>
+                <label for="pw_nuevo">Nueva contraseña</label>
+                <input type="password" class="form-control" id="pw_nuevo" name="pw_nuevo">
+            </div>
+            <div>
+                <label for="pw_confirm">Confirma contraseña</label>
+                <input type="password" class="form-control" id="pw_confirm" name="pw_confirm">
+            </div>
+            <br>
+            <button type="button" class="btn btn-outline-dark btn-light" onclick="adChangePW()">Cambiar</button>
+        </form>
+    </div>
+</div>
