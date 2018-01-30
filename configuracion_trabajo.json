@@ -1,4 +1,5 @@
 {
+	"__comentario__":"Configuracion Equipo Trabajo",
     "ubicacion_documentos":"c:/xampp/htdocs/repoFiles/",
     "servidor":"localhost",
     "usuario_de_bd":"root",
