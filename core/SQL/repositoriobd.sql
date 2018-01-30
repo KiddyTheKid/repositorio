@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 28, 2018 at 05:32 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Jan 30, 2018 at 02:15 PM
+-- Server version: 5.6.16
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -73,13 +71,13 @@ INSERT INTO `carreras` (`id`, `descripcion`) VALUES
 CREATE TABLE `documentos` (
   `id` int(10) UNSIGNED NOT NULL,
   `tema` text,
-  `autor` varchar(10) NOT NULL,
-  `tipo_doc` int(11) NOT NULL,
-  `especialidad` int(11) NOT NULL,
-  `fecha_subida` datetime NOT NULL,
-  `etiquetas` varchar(500) NOT NULL,
-  `metaetiquetas` varchar(500) NOT NULL,
-  `ruta` varchar(600) NOT NULL
+  `autor` varchar(10) DEFAULT NULL,
+  `tipo_doc` int(11) DEFAULT NULL,
+  `especialidad` int(11) DEFAULT NULL,
+  `fecha_subida` datetime DEFAULT NULL,
+  `etiquetas` text,
+  `metaetiquetas` text,
+  `ruta` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -87,8 +85,7 @@ CREATE TABLE `documentos` (
 --
 
 INSERT INTO `documentos` (`id`, `tema`, `autor`, `tipo_doc`, `especialidad`, `fecha_subida`, `etiquetas`, `metaetiquetas`, `ruta`) VALUES
-(1, 'Respaldo de la base de datos', '0931484620', 1, 1, '2018-01-27 23:08:17', 'Base de datos, sql, respaldo', 'Pedro Acosta Respaldo de la base de datos Base de datos sql respaldo', '/opt/lampp/htdocs/repoFiles/2018-Jan-Sun050817.sql'),
-(2, 'pepe libros', '0931484620', 1, 1, '2018-01-27 23:22:37', 'Mega, libros', 'Pedro Acosta pepe libros Mega libros', '/opt/lampp/htdocs/repoFiles/2018-Jan-Sun052237.png');
+(8, 'Repositorio institucional para el Instituto Tecnologico Superior Liceo Cristiano', '0931484620', 1, 1, '2018-01-29 12:16:41', 'Pedro  Acosta  Repositorio  institucional  para  el  Instituto  Tecnologico  Superior  Liceo  Cristiano  repositorio institucional  pagina web  libros  online', 'Pedro  Acosta  Repositorio  institucional  para  el  Instituto  Tecnologico  Superior  Liceo  Cristiano  repositorio institucional  pagina web  libros  online', 'Informatica/Cuaderno/0931484620repositoriobd.sql');
 
 -- --------------------------------------------------------
 
@@ -132,7 +129,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `cedula`, `nombres`, `apellidos`, `correo`, `telefono`, `direccion`, `password`, `nivel`) VALUES
-(1, '0931484620', 'Pedro', 'Acosta', 'pcost8300@gmail.com', '093148460', 'pp', 'fd76520107ec5ce77e2e83667d80f2ae', 0);
+(1, '0931484620', 'Pedro', 'Acosta', 'pcost8300@gmail.com', '093148460', 'pp', 'c7f3d7ed304c17d7edff246690931f93', 0);
 
 --
 -- Indexes for dumped tables
@@ -155,7 +152,7 @@ ALTER TABLE `carreras`
 --
 ALTER TABLE `documentos`
   ADD PRIMARY KEY (`id`);
-ALTER TABLE `documentos` ADD FULLTEXT KEY `idx` (`tema`);
+ALTER TABLE `documentos` ADD FULLTEXT KEY `tema` (`tema`,`etiquetas`);
 
 --
 -- Indexes for table `tipos_documentos`
@@ -178,32 +175,26 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `autores`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `carreras`
 --
 ALTER TABLE `carreras`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tipos_documentos`
 --
 ALTER TABLE `tipos_documentos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
