@@ -6,7 +6,8 @@
                 "id":1,
                 "descripcion":"SHAMPOO",
                 "linea":1,
-                "costo":2.50
+                "costo":2.50,
+                "iva":true
             }
         },
         {"lineas":
@@ -22,13 +23,30 @@
                 "nombres":"Nombres",
                 "apellidos":"apellidos",
                 "correo":"asd@core.com",
-                "celular":"0931425485"
+                "telefono":"0931425485"
             }
         },
-        {"inventario":
+        {"transacciones":
             {
-                "id":"id transaccion"
+                "id":"id transaccion",
+                "factura":"000120002",
+                "cliente":1,
+                "proveedor":0,
+                "item":1,
+                "cantidad":2,
+                "ingreso":true
             }
+        },
+        {"proveedores":
+        	{
+        		"id":1,
+        		"ruc":"09314899001",
+        		"razonsocial":"Mergone SA",
+        		"direccion":"clda nal",
+        		"telefono":"22269222",
+        		"telefono2":"129948484",
+        		"correo":"corre@hme.com"
+        	}
         }
     ]
 }

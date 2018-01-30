@@ -1,0 +1,7 @@
+{
+    "ubicacion_documentos":"c:/xampp/htdocs/repoFiles/",
+    "servidor":"localhost",
+    "usuario_de_bd":"root",
+    "contrasena_bd":"Sebas081120",
+    "base_de_datos":"repositoriobd"
+}
