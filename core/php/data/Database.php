@@ -4,7 +4,7 @@
  *edite el archivo configuracion.json
  */
 $ruta = dirname(dirname(__FILE__));
-$config = $ruta."/../../configuracion.json";
+$config = $ruta."/data/configuracion.json";
 $config = file_get_contents($config);
 $config = json_decode($config);
 
