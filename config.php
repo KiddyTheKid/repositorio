@@ -11,13 +11,13 @@ class jsonEditor{
     }
     public static function tomarArchivo($archivo)
     {
-        $file = @file_get_contents("core/php/data/$archivo");
+        $file = @file_get_contents("core/php/data/cfg/$archivo");
         $json = null;
         if (!$file)
         {
             $json = new jsonEditor();
             $jFile = json_encode($json);
-            file_put_contents("core/php/data/configuracion.json", $jFile);
+            file_put_contents("core/php/data/cfg/configuracion.json", $jFile);
         } else {
             $file = json_decode($file);
             $json = new jsonEditor();
@@ -33,7 +33,7 @@ class jsonEditor{
     public static function guardar($jFile)
     {
         $jFile = json_encode($jFile);
-        file_put_contents("core/php/data/configuracion.json", $jFile);
+        file_put_contents("core/php/data/cfg/configuracion.json", $jFile);
     }
 }
 $usr = "admin_tecno"; $pass = "admin_tecno";
