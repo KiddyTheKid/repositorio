@@ -1,5 +1,6 @@
 <?php
 class Autores{
+	private static $tabla = "autores";
     public function __construct()
     {
         $this->id = null;
@@ -12,36 +13,32 @@ class Autores{
     }
     public static function buscarPorCedula($cedula)
     {
-        $sql = "SELECT * FROM autores
-        WHERE cedula = '$cedula'";
-        $resp = Database::Execute($sql)->fetch_row();
-        $autor = new Autores();
-        $autor->id = $resp[0];
-        $autor->cedula = $resp[1];
-        $autor->nombres = $resp[2];
-        $autor->apellidos = $resp[3];
-        $autor->correo = $resp[4];
-        $autor->telefono = $resp[5];
-        $autor->direccion = $resp[6];
-        return $autor;
+        $sql = "SELECT * FROM ".self::$tabla." WHERE cedula = '$cedula'";
+        $resp = Database::Execute($sql);
+        return self::autorCatcher($resp->fetch_assoc());
     }
     public static function buscarTodo()
     {
-        $sql = "SELECT * FROM autores";
-        $data = array();
+        $sql = "SELECT * FROM ".self::$tabla;
+        $autores = array();
         $resp = Database::Execute($sql);
-        while ($row = $resp->fetch_row())
+        while ($row = $resp->fetch_assoc())
         {
-            $autor = new Autores();
-            $autor->id = $row[0];
-            $autor->cedula = $row[1];
-            $autor->nombres = $row[2];
-            $autor->apellidos = $row[3];
-            $autor->correo = $row[4];
-            $autor->telefono = $row[5];
-            $autor->direccion = $row[6];
-            $data[] = $autor;
+            $autores[] = self::autorCatcher($row);
         }
-        return $data;
+        return $autores;
+    }
+    private static function autorCatcher($row)
+    {
+    	extract($row);
+    	$autor = new Autores();
+    	$autor->id = $id;
+    	$autor->cedula = $cedula;
+    	$autor->nombres = $nombres;
+    	$autor->apellidos = $apellidos;
+    	$autor->correo = $correo;
+    	$autor->telefono = $telefono;
+    	$autor->direccion = $direccion;
+    	return $autor;
     }
 }

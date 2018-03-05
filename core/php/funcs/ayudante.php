@@ -64,6 +64,16 @@ class Parametros{
         }
         return true;
     }
+    public static function dieEmpty($campo)
+    {
+    	if (empty($campo))
+    	{
+    		Cartero::crearMensaje(2, "Error", "Campos Vacios");
+    		exit();
+    	} else {
+    		return $campo;
+    	}
+    }
 }
 class Archivos{
     public static function guardar($archivo, $docData){
@@ -112,37 +122,4 @@ class TablasHTML{
     	}
     	echo '</tbody>';
 	}
-}
-class Combos{
-    public static function cargarTiposDocs()
-    {
-        $tDocs = TiposDocumentos::buscarTodo();
-        foreach ($tDocs as $tDoc)
-        {
-            echo '<option value="'.$tDoc->id.'">
-            '.$tDoc->descripcion.'</option>';
-        }
-    }
-    public static function cargarCarreras()
-    {
-        $carreras = Carreras::buscarTodo();
-        foreach ($carreras as $carrera)
-        {
-            echo '<option value="'.$carrera->id.'">
-            '.$carrera->descripcion.'</option>';
-        }
-    }
-    public static function cargarAutores()
-    {
-        echo '<input class="form-control" list="lista_autores"
-        name="ced_autor" id="ced_autor">
-        <datalist id="lista_autores">';
-        $autores = Autores::buscarTodo();
-        foreach ($autores as $autor)
-        {
-            echo '<option value="'.$autor->cedula.'"
-            label="'.$autor->nombres.' '.$autor->apellidos.'"/>';
-        }
-        echo "</datalist>";
-    }
 }

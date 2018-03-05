@@ -15,9 +15,27 @@ define("PASS", $config->{'contrasena_bd'});
 define("DB", $config->{'base_de_datos'});
 
 class Database{
+	private static $con;
+	private static function isConnected()
+	{
+		if (self::$con == null)
+		{
+			self::Conectar();
+		}
+	}
+	private static function Conectar()
+	{
+		self::$con = mysqli_connect(HOST, USER, PASS, DB);
+		self::$con->set_charset("utf8");
+	}
     public static function Execute($sql)
     {
-        $con = mysqli_connect(HOST, USER, PASS, DB);
-        return $con->query($sql);
+    	self::isConnected();
+        return self::$con->query($sql);
+    }
+    public static function Sanar($campo)
+    {
+    	self::isConnected();
+    	return mysqli_real_escape_string(self::$con, $campo);
     }
 }

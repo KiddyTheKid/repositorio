@@ -5,16 +5,6 @@ class Carreras{
         $this->id = null;
         $this->descripcion = null;
     }
-    public static function mostrarTodo()
-    {
-        $sql = "SELECT * FROM carreras";
-        $resp = Database::Execute($sql);
-        $tabla = new TablasHTML();
-        $tabla->id = "tablaCarreras";
-        $tabla->cabecera = $resp->fetch_fields();
-        $tabla->contenido = $resp;
-        TablasHTML::crearTabla($tabla);
-    }
     public static function buscarTodo()
     {
         $sql = "SELECT * FROM carreras";

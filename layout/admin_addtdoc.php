@@ -17,9 +17,28 @@ include "../core/php/concentrador.php";
     		</div>
     	</div>
     	<div class="col-md-6">
-    		<?php
-    		TiposDocumentos::mostrarTodo();
-    		?>
+    		<table class="table" id="tablaTipoDocumentos">
+    			<thead>
+    				<tr>
+    					<th>Id</th>
+    					<th>Descripcion</th>
+    					<th>Acción</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<?php
+    				$tDocumentos = TiposDocumentos::buscarTodo();
+    				foreach ($tDocumentos as $tDoc)
+    				{
+    					echo "<tr>";
+    					echo "<td>$tDoc->id</td>";
+    					echo "<td>$tDoc->descripcion</td>";
+    					echo "<td></td>";
+    					echo "</tr>";
+    				}
+    				?>
+    			</tbody>
+    		</table>
     	</div>
     </div>
 </div>

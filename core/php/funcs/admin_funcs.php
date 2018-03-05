@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: pedro
- * Date: 21/10/17
- * Time: 22:07
- */
-session_start();
 include "../concentrador.php";
 
 switch ($_POST['accion']){
@@ -19,10 +12,7 @@ switch ($_POST['accion']){
         insertarAutor($con);
         break;
     case 3:
-        insertarUsuario($con);
-        break;
-    case 4:
-        updatePass($con);
+        insertarUsuario();
         break;
     case 5:
     	insertarTipoDoc();
@@ -63,7 +53,7 @@ function insertarTipoDoc()
 	TiposDocumentos::guardar($tipoDoc);
 }
 
-function insertarAutor($con){
+function insertarAutor(){
     if($_POST['cedula'] == "" || $_POST['nombres'] == "" || $_POST['apellidos'] == ""){
         $sql = "ERROR";
     } else {
@@ -80,44 +70,24 @@ function insertarAutor($con){
         Mensajero(0,"Fallido","Error al crear el autor.");
     }
 }
-function insertarUsuario($con){
-    if($_POST['cedula'] == "" || $_POST['nombres'] == "" || $_POST['apellidos'] == ""){
-        $sql = "ERROR";
+function insertarUsuario(){
+	$usr = new Usuarios();
+	$usr->cedula = $_POST['cedula'];
+	$usr->nombres = $_POST['nombres'];
+	$usr->apellidos = $_POST['apellidos'];
+	$usr->correo = $_POST['email'];
+	$usr->direccion = $_POST['direccion'];
+	$usr->telefono = $_POST['telf'];
+	if ($usr->cedula == "")
+	{
+		Cartero::crearMensaje(2, "Error", "No hay Numero de Cedula");
+		exit();
+	}
+    if (Usuarios::crear($usr)){
+        Cartero::crearMensaje(1,"Exito","El usuario fue creado con exito");
     } else {
-        $pass = md5($_POST['cedula']);
-        $sql = "INSERT INTO usuarios (cedula, nombres, apellidos, correo, telefono, direccion, password, nivel) ";
-        $sql = $sql . "VALUES ('" . $_POST['cedula'] . "', '" . $_POST['nombres'] . "', '" . $_POST['apellidos'] . "', '" . $_POST['email'] . "', '" . $_POST['telf'] . "', '" . $_POST['direccion'] . "', '" . $pass . "', 0)";
+        Cartero::crearMensaje(0,"Fallido","Error al crear el usuario.");
     }
-    if (mysqli_query($con,$sql)){
-        Mensajero(1,"Exito","El usuario fue creado con exito");
-    } else {
-        Mensajero(0,"Fallido","Error al crear el usuario.");
-    }
-}
-function updatePass($con){
-    $verifSql = "SELECT password FROM usuarios WHERE cedula = '".$_SESSION['usuario_actual']['cedula']."'";
-    $verifRes = mysqli_query($con,$verifSql);
-    $verifRes = $verifRes->fetch_row();
-    $verifRes = $verifRes[0];
-    $sql = "UPDATE usuarios SET password = '".md5($_POST['pw_nuevo'])."' WHERE cedula = '".$_SESSION['usuario_actual']['cedula']."'";
-    if ($_POST['pw_nuevo'] == "" || $_POST['pw_confirm'] == ""){
-        Mensajero(2,"Aténcion!","Lo nueva contraseña no puede estar vacia.");
-        exit();
-    }
-    if ($_POST['pw_nuevo'] == $_POST['pw_confirm']){
-        if (md5($_POST['pw_anterior']) ==  $verifRes){
-            if (mysqli_query($con,$sql)){
-                Mensajero(1,"Exito","Contraseña Actualizada con exito.");
-            } else {
-                Mensajero(0,"Falló","Fallo al cambiar la contraseña.");
-            }
-        } else {
-            Mensajero(0,"Verificar","La contraseña anterior es incorrecta.");
-        }
-    } else {
-        Mensajero(0,"Contraseñas","La contraseña nueva no coincide.");
-    }
-
 }
 function existeAutor($con){
     $sql = "SELECT * FROM autores where cedula = '".$_POST['cedula']."'";
@@ -129,6 +99,7 @@ function existeAutor($con){
     }
 }
 function logout(){
+	session_start();
     session_destroy();
 }
 function convertirMeta($data){

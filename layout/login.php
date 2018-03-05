@@ -56,7 +56,7 @@ if(isset($_POST['user']) && $_POST['user'] != ""){
     $usuario = Usuarios::buscarPorCedula($ced);
     if($usuario->password === $pass){
         $_SESSION['logged'] = true;
-        $_SESSION['usuario_actual'] = $usuario;
+        $_SESSION['usuario_actual'] = serialize($usuario);
         echo '<script> window.location.href = "";</script>';
     }else{
         $_SESSION['logged'] = false;

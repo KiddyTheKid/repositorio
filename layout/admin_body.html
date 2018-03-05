@@ -1,126 +1,39 @@
-<script>
-    $(function () {
-        admin(0);
-    })
-    function admin(op) {
-        switch (op){
-            case 0:
-                addF("admin_home.php");
-                w3.includeHTML();
-                break;
-            case 1:
-                addF("admin_doc.php");
-                w3.includeHTML();
-                break;
-            case 2:
-                addF("admin_aut.html");
-                w3.includeHTML();
-                break;
-            case 3:
-                addF("admin_usrs.html");
-                w3.includeHTML();
-                break;
-            case 4:
-                $.ajax({
-                    type: 'POST',
-                    url: 'core/php/funcs/admin_funcs.php',
-                    data: {accion:0},
-                    success: function () {
-                        window.location.href = "";
-                    }
-                });
-                break;
-            case 5:
-                addF("admin_changepass.html");
-                w3.includeHTML();
-                break;
-            case 6:
-                addF("admin_addesp.html");
-                w3.includeHTML();
-                break;
-            case 7:
-                addF("admin_addtdoc.php");
-                w3.includeHTML();
-                break;
-        }
-    }
-    function addF(a) {
-        document.getElementById('op').setAttribute("w3-include-html","layout/" + a);
-    }
-    function Exec(accion,form) {
-        $.ajax({
-            type: 'POST',
-            url: 'core/php/funcs/admin_funcs.php',
-            data: $("#" + form).serialize() + "&accion=" + accion,
-            success: function (data) {
-                document.getElementById(form).reset();
-                $("#mensajes").html(data);
-            }
-        });
-    }
-    function ExecFile(accion, form, archivo) {
-        var file = $("#" + archivo)[0].files;
-        if(file.length === 0){
-            alert("No ha seleccionado archivo");
-        } else {
-            var fd = new FormData();
-            fd.append("archivo",file[0]);
-            var formda = $("#" + form).serializeArray();
-            $.each(formda, function (key, input) {
-                fd.append(input.name, input.value);
-            });
-            fd.append("accion",accion);
-            $.ajax({
-                url: 'core/php/funcs/admin_funcs.php',
-                data: fd,
-                contentType: false,
-                processData: false,
-                type: 'POST',
-                success: function(data){
-                    document.getElementById(form).reset();
-                    $("#mensajes").html(data);
-                }
-            });
-        }
-    }
-    function adChangePW() {
-        $.ajax({
-            type: 'POST',
-            url: 'core/php/funcs/admin_funcs.php',
-            data: $("#admin_changepass_form").serialize() + "&accion=4",
-            success: function (data) {
-                document.getElementById('admin_changepass_form').reset();
-                $("#mensajes").html(data);
-            }
-        });
-    }
-</script>
+<script src="js/admin_funcs.js"></script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="im/logo.png" width="330" height="100" class="d-inline-block float-left" alt="" style="max-width: 100%">
+	<a class="navbar-brand" href="#">
+        <img src="im/logo.png" width="330" height="100" 
+        	class="d-inline-block float-left" alt="" style="max-width: 100%">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" 
+    	data-toggle="collapse" data-target="#navbarSupportedContent" 
+    	aria-controls="navbarSupportedContent" aria-expanded="false" 
+    	aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#" onclick="admin(0);">Inicio<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="admin(0);">
+                	Inicio
+                	<span class="sr-only">(current)</span>
+                </a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" 
+                	id="navbarDropdown" role="button" data-toggle="dropdown" 
+                	aria-haspopup="true" aria-expanded="false">
                     Administrar
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="javascript:admin(1)">Subir Documentos</a>
-                    <a class="dropdown-item" href="javascript:admin(2);">Autores</a>
-                    <a class="dropdown-item" href="javascript:admin(3);">Usuarios</a>
-                    <a class="dropdown-item" href="javascript:admin(6);">Carreras</a>
-                    <a class="dropdown-item" href="javascript:admin(7);">Tipos de documento</a>
+                    <a class="dropdown-item" href="javascript:admin('admin_doc.php')">Subir Documentos</a>
+                    <a class="dropdown-item" href="javascript:admin('admin_aut.html');">Autores</a>
+                    <a class="dropdown-item" href="javascript:admin('admin_usrs.html');">Usuarios</a>
+                    <a class="dropdown-item" href="javascript:admin('admin_addesp.html');">Carreras</a>
+                    <a class="dropdown-item" href="javascript:admin('admin_addtdoc.php');">Tipos de documento</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="javascript:admin(5);">Cambiar mi contraseña</a>
-                    <a class="dropdown-item" href="javascript:admin(4);">Cerrar Sesión</a>
+                    <a class="dropdown-item" href="javascript:admin('admin_changepass.html');">Cambiar mi contraseña</a>
+                    <a class="dropdown-item" href="javascript:logout();">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>
