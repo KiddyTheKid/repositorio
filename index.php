@@ -17,5 +17,6 @@ if (isset($_SESSION['logged'])){
 </head>
 <body>
 <?php include($dir); ?>
+
 </body>
 </html>
