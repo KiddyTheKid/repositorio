@@ -12,12 +12,39 @@ class Usuarios{
         $this->password = null;
         $this->nivel = null;
     }
+    public static function buscarPorId($id)
+    {
+    	$id = Database::Sanar($id);
+    	$sql = "SELECT * FROM ".self::$tabla." WHERE id = $id";
+    	$resp = Database::Execute($sql);
+    	return self::usuarioCatcher($resp->fetch_assoc());
+    }
     public static function buscarPorCedula($cedula)
     {
     	$cedula = Database::Sanar($cedula);
         $sql = "SELECT * FROM ".self::$tabla." WHERE cedula = '$cedula'";
         $resp = Database::Execute($sql);
         return self::usuarioCatcher($resp->fetch_assoc());
+    }
+    public static function buscarEnPagina($pagina, $dato)
+    {
+    	if ($dato != "")
+    	{
+    		$val = $dato;
+    		$dato = "WHERE nombres like '%$val%' or ";
+    		$dato .= "apellidos like '%$val%' or ";
+    		$dato .= "cedula like '%$val%'";
+    		
+    	}
+    	$pagina = Database::Sanar($pagina);
+    	$sql = "SELECT * FROM ".self::$tabla." $dato LIMIT $pagina, 30";
+    	$resp = Database::Execute($sql);
+    	$usuarios = array();
+    	while ($row = $resp->fetch_assoc())
+    	{
+    		$usuarios[] = self::usuarioCatcher($row); 
+    	}
+    	return $usuarios;
     }
     public static function crear($u)
     {
@@ -44,6 +71,12 @@ class Usuarios{
     	$id = Database::Sanar($u->id);
     	$pass = $u->password;
     	$sql = "UPDATE ".self::$tabla." SET password = '$pass' WHERE id = $id";
+    	return Database::Execute($sql);
+    }
+    public static function eliminar($id)
+    {
+    	$id = Database::Sanar($id);
+    	$sql = "DELETE FROM ".self::$tabla." WHERE id = $id";
     	return Database::Execute($sql);
     }
     private static function existeUsuario($cedula)

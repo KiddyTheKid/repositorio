@@ -5,9 +5,9 @@ $usr = new Usuarios();
 $usr->cedula = $_POST['cedula'];
 $usr->nombres = $_POST['nombres'];
 $usr->apellidos = $_POST['apellidos'];
-$usr->correo = $_POST['email'];
+$usr->correo = $_POST['correo'];
 $usr->direccion = $_POST['direccion'];
-$usr->telefono = $_POST['telf'];
+$usr->telefono = $_POST['telefono'];
 $usr->password = md5($usr->cedula);
 $usr->nivel = 0;
 

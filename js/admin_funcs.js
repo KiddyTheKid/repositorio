@@ -73,6 +73,24 @@ function getAutor(id)
 		}
 	});
 }
+function getUsuario(id)
+{
+	$.ajax({
+		type: 'POST',
+		url: url + "search_usuario.php",
+		data: {ide:id},
+		success: function (data){
+			console.log(data);
+			let persona = JSON.parse(data);
+			$("#cedula").val(persona.cedula);
+			$("#nombres").val(persona.nombres);
+			$("#apellidos").val(persona.apellidos);
+			$("#telefono").val(persona.telefono);
+			$("#direccion").val(persona.direccion);
+			$("#correo").val(persona.correo);
+		}
+	});
+}
 function delAutor(id)
 {
 	let res = confirm("¿Está seguro que desea eliminar?");
@@ -84,6 +102,22 @@ function delAutor(id)
 			data: {ide:id},
 			success: function (data){
 				admin("admin_aut.php");
+				$("#mensajes").html(data);
+			}
+		});
+	}
+}
+function delUsuario(id)
+{
+	let res = confirm("¿Está seguro que desea eliminar?");
+	if (res)
+	{
+		$.ajax({
+			type: 'POST',
+			url : url + "eliminar_usuario.php",
+			data: {ide:id},
+			success: function (data){
+				admin("admin_usrs.php");
 				$("#mensajes").html(data);
 			}
 		});
@@ -122,6 +156,29 @@ function traerAutores(n)
 		data: {pg:nPg, name: nombre},
 		success: function (data){
 			$("#tabla_autores").html(data);
+		}
+	});
+}
+function traerUsuarios(n)
+{
+	if (n == "+")
+	{
+		nPg += 10;
+	}
+	if (n == "-")
+	{
+		if (nPg != 0)
+		{
+			nPg -= 10;
+		}
+	}
+	let nombre = $("#searcher").val();
+	$.ajax({
+		type: 'POST',
+		url: url + "traer_usuarios.php",
+		data: {pg:nPg, name: nombre},
+		success: function (data){
+			$("#tabla_usuarios").html(data);
 		}
 	});
 }
