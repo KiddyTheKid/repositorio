@@ -13,12 +13,12 @@ include "Modals/crear_autor.php";
 				data-target="#autor_creador" class="btn btn-default">
 				+ Crear
 			</button>
-			<button type="button " class="btn btn-default" onclick="traerAutores(0)">
+			<button type="button " class="btn btn-default" onclick="Autor.getTabla(0)">
 				Buscar
 			</button>
 			<br><br>
 			<input type="text" id="searcher" placeholder="Buscar por Nombre, Apellido o Cedula"
-				class="form-control" onkeyup="traerAutores(0)">
+				class="form-control" onkeyup="Autor.getTabla(0)">
 			<div id="tabla_autores">
 				<table class="table">
 					<thead>

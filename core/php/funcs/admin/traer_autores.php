@@ -23,10 +23,10 @@ foreach ($autores as $autor)
 	echo "<td>$autor->telefono</td>";
 	echo "<td>";
 	echo "<button class=\"btn btn-primary\" data-toggle='modal' ";
-	echo "onclick='getAutor($autor->id)' data-target='#autor_editor'>";
+	echo "onclick='Autor.get($autor->id)' data-target='#autor_editor'>";
 	echo "Editar";
 	echo "</button>";
-	echo "<button class=\"btn btn-danger\" onclick='delAutor($autor->id)'>";
+	echo "<button class=\"btn btn-danger\" onclick='Autor.borrar($autor->id)'>";
 	echo "Eliminar";
 	echo "</button>";
 	echo "</td>";
@@ -34,6 +34,6 @@ foreach ($autores as $autor)
 }
 echo "</tbody>";
 echo "</table>";
-echo "<button class='btn btn-default' onclick='traerAutores(\"-\")'>Anterior</button>";
-echo "<button class='btn btn-default' onclick='traerAutores(\"+\")'>Siguiente</button>";
+echo "<button class='btn btn-default' onclick='Autor.getTabla(\"-\")'>Anterior</button>";
+echo "<button class='btn btn-default' onclick='Autor.getTabla(\"+\")'>Siguiente</button>";
 

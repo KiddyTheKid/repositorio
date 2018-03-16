@@ -73,6 +73,18 @@ class Usuarios{
     	$sql = "UPDATE ".self::$tabla." SET password = '$pass' WHERE id = $id";
     	return Database::Execute($sql);
     }
+    public static function editar($u)
+    {
+    	$ced = Database::Sanar($u->cedula);
+    	$a = Database::Sanar($u->nombres);
+    	$b = Database::Sanar($u->apellidos);
+    	$c = Database::Sanar($u->correo);
+    	$d = Database::Sanar($u->telefono);
+    	$e = Database::Sanar($u->direccion);
+    	$sql = "UPDATE ".self::$tabla." SET nombres = '$a', apellidos = '$b', 
+    		correo = '$c', telefono = '$d', direccion = '$e' WHERE cedula = '$ced'";
+    	return Database::Execute($sql);
+    }
     public static function eliminar($id)
     {
     	$id = Database::Sanar($id);

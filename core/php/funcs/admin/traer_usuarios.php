@@ -23,10 +23,10 @@ foreach ($usuarios as $usuario)
 	echo "<td>$usuario->telefono</td>";
 	echo "<td>";
 	echo "<button class=\"btn btn-primary\" data-toggle='modal' ";
-	echo "onclick='getUsuario($usuario->id)' data-target='#usuario_editor'>";
+	echo "onclick='Usuario.get($usuario->id)' data-target='#usuario_editor'>";
 	echo "Editar";
 	echo "</button>";
-	echo "<button class=\"btn btn-danger\" onclick='delUsuario($usuario->id)'>";
+	echo "<button class=\"btn btn-danger\" onclick='Usuario.borrar($usuario->id)'>";
 	echo "Eliminar";
 	echo "</button>";
 	echo "</td>";
@@ -34,6 +34,6 @@ foreach ($usuarios as $usuario)
 }
 echo "</tbody>";
 echo "</table>";
-echo "<button class='btn btn-default' onclick='traerUsuarios(\"-\")'>Anterior</button>";
-echo "<button class='btn btn-default' onclick='traerUsuarios(\"+\")'>Siguiente</button>";
+echo "<button class='btn btn-default' onclick='Usuario.getTabla(\"-\")'>Anterior</button>";
+echo "<button class='btn btn-default' onclick='Usuario.getTabla(\"+\")'>Siguiente</button>";
 

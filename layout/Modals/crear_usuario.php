@@ -10,7 +10,7 @@
         </button>
       </div>
       <div class="modal-body">
-      	<form id="create_usuario_form" base="admin_usrs.php" action="core/php/funcs/admin/crear_usuario.php">
+      	<form id="create_usuario_form">
       		<div class="form-group">
       			<label for="cedula">
       			Cédula
@@ -53,7 +53,7 @@
         <button type="button" class="btn btn-secondary" 
         	data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" 
-        	data-dismiss="modal" onclick="Exec('create_usuario_form')">Crear</button>
+        	data-dismiss="modal" onclick="Usuario.crear()">Crear</button>
       </div>
     </div>
   </div>

@@ -53,7 +53,7 @@
         <button type="button" class="btn btn-secondary" 
         	data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" 
-        	data-dismiss="modal" onclick="Exec('create_autor_form')">Crear</button>
+        	data-dismiss="modal" onclick="Autor.crear()">Crear</button>
       </div>
     </div>
   </div>

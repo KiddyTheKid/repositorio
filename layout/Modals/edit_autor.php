@@ -53,7 +53,7 @@
         <button type="button" class="btn btn-secondary" 
         	data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" 
-        	data-dismiss="modal" onclick="editarAutor()">Guardar</button>
+        	data-dismiss="modal" onclick="Autor.editar()">Guardar</button>
       </div>
     </div>
   </div>

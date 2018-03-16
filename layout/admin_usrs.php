@@ -13,12 +13,12 @@ include "Modals/crear_usuario.php";
 				data-target="#usuario_creador" class="btn btn-default">
 				+ Crear
 			</button>
-			<button type="button " class="btn btn-default" onclick="traerUsuarios(0)">
+			<button type="button " class="btn btn-default" onclick="Usuario.getTabla(0)">
 				Buscar
 			</button>
 			<br><br>
 			<input type="text" id="searcher" placeholder="Buscar por Nombre, Apellido o Cedula"
-				class="form-control" onkeyup="traerUsuarios(0)">
+				class="form-control" onkeyup="Usuario.getTabla(0)">
 			<div id="tabla_usuarios">
 				<table class="table">
 					<thead>
