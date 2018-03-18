@@ -30,6 +30,6 @@ foreach ($carreras as $carrera)
 }
 echo "</tbody>";
 echo "</table>";
-echo "<button class='btn btn-default' onclick='carrera.getTabla(\"-\")'>Anterior</button>";
-echo "<button class='btn btn-default' onclick='carrera.getTabla(\"+\")'>Siguiente</button>";
+echo "<button class='btn btn-default' onclick='Carrera.getTabla(\"-\")'>Anterior</button>";
+echo "<button class='btn btn-default' onclick='Carrera.getTabla(\"+\")'>Siguiente</button>";
 
