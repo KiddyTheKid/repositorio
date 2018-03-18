@@ -18,7 +18,7 @@ function logout(){
 function adChangePW() {
 	$.ajax({
 		type: 'POST',
-		url: url + 'pw_update.php',
+		url: 'core/php/funcs/admin/pw_update.php',
 		data: $("#admin_changepass_form").serialize(),
 		success: function (data) {
 			document.getElementById('admin_changepass_form').reset();
@@ -26,3 +26,6 @@ function adChangePW() {
 		}
 	});
 }
+$(document).ready(function (){
+	admin('admin_home.php');
+});

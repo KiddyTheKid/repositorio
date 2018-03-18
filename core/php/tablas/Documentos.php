@@ -1,5 +1,6 @@
 <?php
 class Documentos{
+	private static $tabla = "documentos";
     public function __construct()
     {
         $this->id = null;
@@ -14,6 +15,10 @@ class Documentos{
     }
     public static function buscarDocumento($sDoc)
     {
+    	$sDoc->especialidad = Database::Sanar($sDoc->especialidad);
+    	$sDoc->tipo_doc = Database::Sanar($sDoc->tipo_doc);
+    	$sDoc->fecha_subida = Database::Sanar($sDoc->fecha_subida);
+    	
         $params = "";
         $params .= Parametros::agregarParametro($sDoc->especialidad,
         "doc.especialidad");
@@ -26,7 +31,7 @@ class Documentos{
         concat(aut.nombres, ' ', aut.apellidos),
         doc.tema, doc.fecha_subida, doc.ruta,
         tp.descripcion, c.descripcion
-        FROM documentos as doc
+        FROM ".self::$tabla." as doc
         INNER JOIN autores as aut
         ON doc.autor = aut.cedula
         INNER JOIN tipos_documentos as tp
@@ -36,9 +41,9 @@ class Documentos{
         WHERE MATCH (doc.tema, doc.etiquetas)
         AGAINST ('$sDoc->tema' IN NATURAL LANGUAGE MODE)
         $params";
-
         $resultado = Database::Execute($sql);
-        while ($row = $resultado->fetch_row()){
+        while ($row = $resultado->fetch_row())
+        {
             $doc = new Documentos();
             $doc->autor = $row[0];
             $doc->tema = $row[1];
@@ -49,13 +54,44 @@ class Documentos{
             Cartero::crearTarjeta($doc);
         }
     }
-    public static function guardar($doc){
+    public static function buscarPorId($id)
+    {
+    	$id = Database::Sanar($id);
+    	$sql = "SELECT * FROM ".self::$tabla." WHERE id = $id";
+    	$resp = Database::Execute($sql);
+    	return self::documentoCatcher($resp->fetch_assoc());
+    }
+    public static function buscarEnPagina($pagina, $dato)
+    {
+    	if ($dato != "")
+    	{
+    		$val = $dato;
+    		$dato ="WHERE MATCH (tema, etiquetas) 
+    			AGAINST ('$val' IN NATURAL LANGUAGE MODE)";
+    		
+    	}
+    	$pagina = Database::Sanar($pagina);
+    	$sql = "SELECT * FROM ".self::$tabla." $dato LIMIT $pagina, 30";
+    	$resp = Database::Execute($sql);
+    	$documentos = array();
+    	while ($row = $resp->fetch_assoc())
+    	{
+    		$documentos[] = self::documentoCatcher($row); 
+    	}
+    	return $documentos;
+    }
+    public static function crear($doc){
+    	$a = Database::Sanar($doc->tema);
+    	$b = Database::Sanar($doc->autor);
+    	$c = Database::Sanar($doc->tipo_doc);
+    	$d = Database::Sanar($doc->especialidad);
+    	$e = Database::Sanar($doc->etiquetas);
+    	$f = Database::Sanar($doc->metaetiquetas);
+    	$g = Database::Sanar($doc->ruta);
         $sql = "INSERT INTO
         documentos (tema, autor, tipo_doc, especialidad, fecha_subida,
         etiquetas, metaetiquetas, ruta)
-        VALUES ('$doc->tema', '$doc->autor',
-            $doc->tipo_doc, $doc->especialidad, NOW(),
-            '$doc->etiquetas', '$doc->metaetiquetas', '$doc->ruta')";
+        VALUES ('$a', '$b', $c, $d, NOW(), '$e', '$f', '$g')";
         if (Database::Execute($sql)){
             Cartero::crearMensaje(1, "Exito!", "Documento listo");
         } else {
@@ -63,5 +99,52 @@ class Documentos{
             la acción");
         }
 
+    }
+    public static function editar($doc){
+    	$id = Database::Sanar($doc->id);
+    	$a = Database::Sanar($doc->tema);
+    	$b = Database::Sanar($doc->autor);
+    	$c = Database::Sanar($doc->tipo_doc);
+    	$d = Database::Sanar($doc->especialidad);
+    	$e = Database::Sanar($doc->etiquetas);
+    	$f = Database::Sanar($doc->metaetiquetas);
+    	$g = Database::Sanar($doc->ruta);
+    	$g = $g != "" ? ", ruta = '$g'" : "";
+        $sql = "UPDATE ".self::$tabla." SET
+        tema = '$a', autor = '$b', tipo_doc = $c, especialidad = $d,
+        etiquetas = '$e', metaetiquetas = '$f' $g WHERE id = $id";
+        if (Database::Execute($sql)){
+            Cartero::crearMensaje(1, "Exito!", "Documento editado");
+        } else {
+            Cartero::crearMensaje(2, "Problema", "No se pudo completar
+            la acción");
+        }
+
+    }
+    public static function borrar($id)
+    {
+    	$id = Database::Sanar($id->id);
+    	$sql = "DELETE FROM ".self::$tabla." WHERE id = $id";
+    	if (Database::Execute($sql))
+		{
+			Cartero::crearMensaje(1, "Exito!", "Fue eliminado el registro");
+		} else {
+			Cartero::crearMensaje(2, "Error", "Vuelva a intentarlo");
+		}
+    }
+    private static function documentoCatcher($row)
+    {
+    	extract($row);
+    	$doc = new Documentos();
+    	$doc->id = $id;
+        $doc->autor = Autores::buscarPorCedula($autor);
+        $doc->tipo_doc = TiposDocumentos::buscarPorId($tipo_doc);
+        $doc->especialidad = Carreras::buscarPorId($especialidad);
+        $doc->fecha_subida = $fecha_subida;
+        $doc->etiquetas = $etiquetas;
+        $doc->metaetiquetas = $metaetiquetas;
+        $doc->tema = $tema;
+        $doc->ruta = $ruta;
+        return $doc;
     }
 }

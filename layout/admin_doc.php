@@ -1,91 +1,34 @@
 <?php
 include "../core/php/concentrador.php";
+include "Modals/edit_documento.php";
+include "Modals/crear_documento.php";
 ?>
-<div class="container">
-    <h4>Subir un documento</h4>
-    <br>
-    <form id="admin_doc_sub" action="core/php/funcs/admin/doc_upload.php">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <div class="col-form-label">
-                        <label>Tipo de trabajo</label>
-                    </div>
-                    <select class="custom-select"
-                    name="select_combo_documentos"
-                    id="select_combo_documentos">
-                    <?php
-                    $tDocs = TiposDocumentos::buscarTodo();
-                    foreach ($tDocs as $tDoc)
-                    {
-                    	echo "<option value='$tDoc->id'>";
-                    	echo "$tDoc->descripcion</option>";
-                    }
-                    ?>
-                    </select>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <div class="col-form-label">
-                        <label>Especialidad</label>
-                    </div>
-                    <select class="custom-select"
-                    name="select_combo_carreras"
-                    id="select_combo_carreras">
-                    <?php
-                    $carreras = Carreras::buscarTodo();
-                    foreach ($carreras as $carrera)
-                    {
-                    	echo "<option value='$carrera->id'>";
-                    	echo "$carrera->descripcion</option>";
-                    }
-                    ?>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-form-label">
-                <label>Tema</label>
-            </div>
-            <input type="text" name="tema" id="tema"
-            placeholder="Tema del libro" class="form-control">
-        </div>
-        <div class="form-group">
-            <div class="col-form-label">
-                <label>Nombre del autor</label>
-            </div>
-            <input class="form-control" list="lista_autores" 
-            	name="ced_autor" id="ced_autor">
-            	<datalist id="lista_autores">
-            		<?php
-            		$autores = Autores::buscarTodo();
-            		foreach ($autores as $autor)
-            		{
-            			echo "<option value='$autor->cedula' ";
-            			echo "label='$autor->nombres $autor->apellidos'/>";
-            		}
-            		?>
-            	</datalist>
-        </div>
-        <div class="form-group">
-            <div class="col-form-label">
-                <label>Etiquetas</label>
-            </div>
-            <input type="text" name="etiquetas" id="etiquetas" 
-            	placeholder="Inserte las etiquetas separadas por una coma" 
-            	class="form-control">
-        </div>
-        <div class="form-group">
-            <div class="col-form-label">
-                <label for="archivo">Archivo</label>
-            </div>
-            <input id="archivo" name="archivo" type="file" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="button" onclick="ExecFile(1,'admin_doc_sub','archivo');" 
-            	class="btn btn-outline-dark btn-light" value="Subir Archivo">
-        </div>
-    </form>
+<div class="container-fluid">
+    <h3>Documentos</h3>
+    <div class="form-group">
+    	<form id="addtdocForm">
+    		<input type="button" value="+ Registrar" data-toggle="modal"
+    		class="btn btn-default" data-target="#documento_creador">
+    		<input type="button" value="Buscar" 
+    		class="btn btn-default" onclick="Documento.getTabla(0)">
+    		<br><br>
+    		<input type="text" id="searcher" name="searcher"
+    		placeholder="Buscar por nombre, cedula de autor o nombre de autor" 
+    		onkeyup="Documento.getTabla(0)" class="form-control">    		
+    	</form>
+    </div>
+    <table class="table" id="tabla_documentos">
+    	<thead>
+    		<tr>
+    		<th>Id</th>
+    		<th>Tema</th>
+    		<th>Autor</th>
+    		<th>Carrera</th>
+    		<th>Trabajo</th>
+    		<th>Acción</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	</tbody>
+    </table>
 </div>

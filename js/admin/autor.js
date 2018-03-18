@@ -33,6 +33,7 @@ class Autor{
 			data: form.serialize(),
 			success: function (data){
 				Autor.getTabla(0);
+				form[0].reset();
 				$("#mensajes").html(data);
 			}
 		});
@@ -45,6 +46,7 @@ class Autor{
 			data: form.serialize(),
 			success: function (data){
 				Autor.getTabla(0);
+				form[0].reset();
 				$("#mensajes").html(data);
 			}
 		});

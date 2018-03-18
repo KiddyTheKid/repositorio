@@ -34,6 +34,7 @@ class Usuario{
 			data: form.serialize(),
 			success: function (data){
 				Usuario.getTabla(0);
+				form[0].reset();
 				$("#mensajes").html(data);
 			}
 		});
@@ -46,6 +47,7 @@ class Usuario{
 			data: form.serialize(),
 			success: function (data){
 				Usuario.getTabla(0);
+				form[0].reset();
 				$("#mensajes").html(data);
 			}
 		});

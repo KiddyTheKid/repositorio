@@ -10,7 +10,7 @@ class Cartero{
         <strong>'.$documento->tema.'</strong>
         <br>Por: '.$documento->autor.'
         <br>Trabajo: '.$documento->tipo_doc.'
-        Carrera: '.$documento->especialidad.'
+         Carrera: '.$documento->especialidad.'
         <br>Creado: '.$documento->fecha_subida.'
         </div>
         </div>
@@ -80,15 +80,15 @@ class Archivos{
         $carrera = Carreras::buscarPorId($docData->especialidad);
         $tipoDoc = TiposDocumentos::buscarPorId($docData->tipo_doc);
         $direccion = RUTA_DOCUMENTOS.$carrera->descripcion."/";
-        $direccion .= $tipoDoc->descripcion."/";
+        $direccion .= $tipoDoc->descripcion."/".$docData->autor."/";
         if (!file_exists($direccion))
         {
             mkdir($direccion, 0777, true);
         }
         $nombreArchivo = $carrera->descripcion."/".$tipoDoc->descripcion."/";
-        $nombreArchivo .= $docData->autor.$archivo['name'];
+        $nombreArchivo .= $docData->autor."/".$archivo['name'];
         $ext = pathinfo($archivo['name'], PATHINFO_EXTENSION);
-        $dir_archivo = $direccion.basename($docData->autor.$archivo['name']);
+        $dir_archivo = $direccion.basename($archivo['name']);
         move_uploaded_file($archivo['tmp_name'], $dir_archivo);
         return $nombreArchivo;
     }

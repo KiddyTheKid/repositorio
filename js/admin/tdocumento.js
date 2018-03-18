@@ -24,6 +24,7 @@ class TDocumento{
 			data: form.serialize(),
 			success: function (data){
 				TDocumento.getTabla(0);
+				form[0].reset();
 				$("#mensajes").html(data);
 			}
 		});
@@ -36,6 +37,7 @@ class TDocumento{
 			data: form.serialize(),
 			success: function (data){
 				TDocumento.getTabla(0);
+				form[0].reset();
 				$("#mensajes").html(data);
 			}
 		});
