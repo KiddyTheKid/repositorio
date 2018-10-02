@@ -5,4 +5,30 @@
 #797560 Cafe Capuccino
 #081003 Negro Medio Claro (No es gris)
 */
+.seccion-imagen {
+	display: flex;
+	padding-top: 2em;
+}
+.seccion-imagen img {
+	margin: auto;
+}
+
+.seccion-busqueda {
+	padding: 1em 5em;
+}
+.seccion-busqueda div[class="row"]{
+	padding-bottom: 5px;
+}
+
+.seccion-resultados {
+	margin: 0em 4em 1em 4em;
+}
+
+.seccion-resultados > a {
+    display: block;
+}
+
+a[class=dropdown-item] {
+    cursor: pointer;
+}
 

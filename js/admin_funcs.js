@@ -1,10 +1,5 @@
-function admin(pag) {
-	addF(pag);
-	w3.includeHTML();
-}
-function addF(a) {
-	document.getElementById('op').setAttribute("w3-include-html","layout/" + a);
-}
+var menuItems, contentOp;
+
 function logout(){
 	$.ajax({
 		type: 'POST',
@@ -26,6 +21,22 @@ function adChangePW() {
 		}
 	});
 }
-$(document).ready(function (){
-	admin('admin_home.php');
-});
+window.onload = function (){
+    contentOp = document.getElementById('op');
+    menuItems = document.getElementsByClassName("dropdown-item");
+    Array.from(menuItems).forEach(function(dom){
+        if (dom.getAttribute("target") === "logout") {
+            dom.addEventListener("click", function(){
+                logout();
+            });
+        } else {
+            dom.addEventListener("click", function(){
+                contentOp.setAttribute("w3-include-html","layout/" + dom.getAttribute("target"));
+                w3.includeHTML();
+            });
+        }
+    });
+
+    contentOp.setAttribute("w3-include-html", "layout/admin_home.php");
+    w3.includeHTML();
+};
