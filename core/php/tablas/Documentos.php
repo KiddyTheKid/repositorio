@@ -13,46 +13,33 @@ class Documentos{
         $this->tema = null;
         $this->ruta = null;
     }
-    public static function buscarDocumento($sDoc)
-    {
-    	$sDoc->especialidad = Database::Sanar($sDoc->especialidad);
-    	$sDoc->tipo_doc = Database::Sanar($sDoc->tipo_doc);
-    	$sDoc->fecha_subida = Database::Sanar($sDoc->fecha_subida);
-    	
-        $params = "";
-        $params .= Parametros::agregarParametro($sDoc->especialidad,
-        "doc.especialidad");
-        $params .= Parametros::agregarParametro($sDoc->tipo_doc,
-        "doc.tipo_doc");
-        $params .= Parametros::agregarParametro($sDoc->fecha_subida,
-        "doc.fecha_subida");
 
-        $sql = "SELECT
-        concat(aut.nombres, ' ', aut.apellidos),
-        doc.tema, doc.fecha_subida, doc.ruta,
-        tp.descripcion, c.descripcion
-        FROM ".self::$tabla." as doc
-        INNER JOIN autores as aut
-        ON doc.autor = aut.cedula
-        INNER JOIN tipos_documentos as tp
-        ON doc.tipo_doc = tp.id
-        INNER JOIN carreras AS c
-        ON doc.especialidad = c.id
-        WHERE MATCH (doc.tema, doc.etiquetas)
-        AGAINST ('$sDoc->tema' IN NATURAL LANGUAGE MODE)
-        $params";
+    /**
+     * Buscar documentos de cualquier forma
+     * @param Documentos $sDoc
+     */
+    public static function buscarDocumento($sDoc) {
+        $sql = "CALL buscar_documento('%s', %s, %s, %s);";
+        $sql = sprintf($sql, $sDoc->tema,
+            $sDoc->especialidad == null ? "NULL" : $sDoc->especialidad,
+                $sDoc->tipo_doc == null ? "NULL" : $sDoc->tipo_doc,
+                $sDoc->fecha_subida == null ? "NULL" : $sDoc->fecha_subida);
         $resultado = Database::Execute($sql);
+        $resps = [];
         while ($row = $resultado->fetch_row())
         {
             $doc = new Documentos();
-            $doc->autor = $row[0];
-            $doc->tema = $row[1];
+            $doc->autor = utf8_encode($row[0]);
+            $doc->tema = utf8_encode($row[1]);
             $doc->fecha_subida = $row[2];
-            $doc->ruta = $row[3];
+            $doc->ruta = utf8_encode($row[3]);
             $doc->tipo_doc = $row[4];
             $doc->especialidad = $row[5];
-            Cartero::crearTarjeta($doc);
+            $resps[] = $doc;
+            //Cartero::crearTarjeta($doc);
         }
+        header('Content-type: application/json');
+        echo  json_encode($resps);
     }
     public static function buscarPorId($id)
     {

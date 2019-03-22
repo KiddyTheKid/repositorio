@@ -28,6 +28,11 @@ class Database{
 		self::$con = mysqli_connect(HOST, USER, PASS, DB);
 		self::$con->set_charset("utf8");
 	}
+
+    /**
+     * @param string $sql
+     * @return mysqli_result
+     */
     public static function Execute($sql)
     {
     	self::isConnected();

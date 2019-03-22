@@ -1,3 +1,14 @@
+<style>
+    .card-body > * {
+        display: block;
+    }
+    .card {
+        transition: 1s;
+    }
+    .card:hover {
+        background: #ded9d9;
+    }
+</style>
 <section class="seccion-imagen">
 	<img src="im/logo.png" height="120" style="max-width: 100%">
 </section>
@@ -38,7 +49,7 @@
 			<input type="date" class="form-control" name="fecha" id="fecha" value="">
         </div>
         <div class="col">
-        	<button class="btn btn-secondary" type="button" onclick="busquedaAvanzada()">Busqueda avanzada</button>
+        	<button class="btn btn-secondary" type="button" onclick="busquedaAvanzada('busqueda')">Busqueda avanzada</button>
         </div>
 	</div>
     <div class="row">
@@ -51,7 +62,7 @@
     	<div class="input-group">
     		<input type="text" name="busqueda" class="form-control" placeholder="Busqueda...">
             <span class="input-group-btn">
-            	<button class="btn btn-secondary" type="button" onclick="realizarBusqueda()">Buscar</button>
+            	<button class="btn btn-secondary" type="button" onclick="realizarBusqueda('busqueda')">Buscar</button>
             </span>
         </div>
     </div>

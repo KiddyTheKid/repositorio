@@ -24,13 +24,20 @@ function realizarBusqueda(){
 }
 function realizarBusquedaAvanzada(){
     $doc = new Documentos();
-    $doc->tema = (isset($_POST['busqueda']) && !empty($_POST['busqueda']))?
-    $_POST['busqueda'] : exit();
-    $doc->especialidad = (isset($_POST['carrera']) && $_POST['carrera'] != 0)?
-    $_POST['carrera'] : null;
-    $doc->tipo_doc = (isset($_POST['tipo_doc']) && $_POST['tipo_doc'] != 0)?
-    $_POST['tipo_doc'] : null;
-    $doc->fecha_subida = (isset($_POST['fecha']))?$_POST['fecha']:null;
+    if (isset($_POST["busqueda"])) {
+        $doc->tema = $_POST["busqueda"];
+    } else {
+        return;
+    }
+    if (isset($_POST["carrera"]) && $_POST["carrera"] != 0) {
+        $doc->especialidad = $_POST["carrera"];
+    }
+    if (isset($_POST["tipo_doc"]) && $_POST["tipo_doc"] != 0) {
+        $doc->tipo_doc = $_POST["tipo_doc"];
+    }
+    if (isset($_POST["fecha"])) {
+        $doc->fecha_subida = $_POST["fecha"];
+    }
     Documentos::buscarDocumento($doc);
 }
 function generarCartaResultado($con, $dato){
