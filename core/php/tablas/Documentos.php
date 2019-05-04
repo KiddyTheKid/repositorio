@@ -36,7 +36,6 @@ class Documentos{
             $doc->tipo_doc = $row[4];
             $doc->especialidad = $row[5];
             $resps[] = $doc;
-            //Cartero::crearTarjeta($doc);
         }
         header('Content-type: application/json');
         echo  json_encode($resps);

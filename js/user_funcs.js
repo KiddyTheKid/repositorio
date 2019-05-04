@@ -27,6 +27,11 @@ function realizarBusqueda(campoTextoParam) {
         url: 'core/php/funcs/user_funcs.php',
         data: message,
         success: function (data) {
+            console.log(data);
+            if (data.length < 1) {
+                resultadoContainer.innerHTML = "<h3>No hay resultados</h3>";
+                return;
+            }
             resultadoContainer.innerHTML = "";
             data.forEach(function(info){
                 resultadoContainer.appendChild(crearTarjeta(info));
@@ -51,7 +56,12 @@ function busquedaAvanzada(campoTextoParam) {
         url: 'core/php/funcs/user_funcs.php',
         data: message,
         success: function (data) {
+            console.log(data);
             resultadoContainer.innerHTML = "";
+            if (data.length < 1) {
+                resultadoContainer.innerHTML = "<h3>No hay resultados</h3>";
+                return;
+            }
             data.forEach(function(info){
                 resultadoContainer.appendChild(crearTarjeta(info));
             });
