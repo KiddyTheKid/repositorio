@@ -17,8 +17,7 @@ include "../core/php/concentrador.php";
 					Subida trabajos y edite o elimine los registros que guarde.
 				</p>
 				<p>
-					<a class="btn btn-primary btn-large" 
-					href="javascript:admin('admin_doc.php')">Ir Ahora</a>
+					<a class="btn btn-primary btn-large" onclick="irAlLugar(this)" target="admin_doc.php">Ir Ahora</a>
 				</p>
 			</div>
 		</div>
@@ -32,8 +31,7 @@ include "../core/php/concentrador.php";
 					<br>
 				</p>
 				<p>
-					<a class="btn btn-primary btn-large" 
-					href="javascript:admin('admin_aut.php')">Ir Ahora</a>
+					<a class="btn btn-primary btn-large" onclick="irAlLugar(this)" target="admin_aut.php">Ir Ahora</a>
 				</p>
 			</div>
 		</div>
@@ -46,8 +44,7 @@ include "../core/php/concentrador.php";
 					Cree, elimine o edite usuarios de la plataforma.
 				</p>
 				<p>
-					<a class="btn btn-primary btn-large" 
-					href="javascript:admin('admin_usrs.php')">Ir Ahora</a>
+					<a class="btn btn-primary btn-large" onclick="irAlLugar(this)" target="admin_usrs.php">Ir Ahora</a>
 				</p>
 			</div>
 		</div>
@@ -63,8 +60,7 @@ include "../core/php/concentrador.php";
 					los documentos cargados.
 				</p>
 				<p>
-					<a class="btn btn-primary btn-large" 
-					href="javascript:admin('admin_addesp.php')">Ir Ahora</a>
+					<a class="btn btn-primary btn-large" onclick="irAlLugar(this)" target="admin_addesp.php">Ir Ahora</a>
 				</p>
 			</div>
 		</div>
@@ -77,8 +73,7 @@ include "../core/php/concentrador.php";
 					Agregue, edite o elimine los tipos de documentos con los que trabajara.
 				</p>
 				<p>
-					<a class="btn btn-primary btn-large" 
-					href="javascript:admin('admin_addtdoc.php')">Ir Ahora</a>
+					<a class="btn btn-primary btn-large" onclick="irAlLugar(this)" target="admin_addtdoc.php">Ir Ahora</a>
 				</p>
 			</div>
 		</div>
