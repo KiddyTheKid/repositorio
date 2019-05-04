@@ -47,3 +47,9 @@
 <br>
 <div id="mensajes" class="container-fluid"></div>
 <div id="op"></div>
+<script>
+    function irAlLugar(dom) {
+        contentOp.setAttribute("w3-include-html", "layout/" + dom.getAttribute("target"));
+        w3.includeHTML();
+    }
+</script>

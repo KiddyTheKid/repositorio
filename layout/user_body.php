@@ -1,10 +1,21 @@
+<style>
+    .card-body > * {
+        display: block;
+    }
+    .card {
+        transition: 1s;
+    }
+    .card:hover {
+        background: #ded9d9;
+    }
+</style>
 <section class="seccion-imagen">
 	<img src="im/logo.png" height="120" style="max-width: 100%">
 </section>
 <section id="busquedaAvanzada" class="seccion-busqueda" style="display: none">
     <div class="row">
     	<div class="col">
-    		<input type="text" name="busqueda" class="form-control" placeholder="Busqueda...">
+    		<input type="text" name="busqueda" class="form-control advanced" placeholder="Busqueda...">
         </div>
     </div>
 	<div class="row">
@@ -38,7 +49,7 @@
 			<input type="date" class="form-control" name="fecha" id="fecha" value="">
         </div>
         <div class="col">
-        	<button class="btn btn-secondary" type="button" onclick="busquedaAvanzada()">Busqueda avanzada</button>
+        	<button class="btn btn-secondary" type="button" id="btn-advanced-search">Busqueda avanzada</button>
         </div>
 	</div>
     <div class="row">
@@ -49,9 +60,9 @@
 <section id="busquedaNormal" class="seccion-busqueda">
 	<div class="row">
     	<div class="input-group">
-    		<input type="text" name="busqueda" class="form-control" placeholder="Busqueda...">
+    		<input type="text" name="busqueda" class="form-control normal" placeholder="Busqueda...">
             <span class="input-group-btn">
-            	<button class="btn btn-secondary" type="button" onclick="realizarBusqueda()">Buscar</button>
+            	<button class="btn btn-secondary" type="button" id="btn-normal-search">Buscar</button>
             </span>
         </div>
     </div>
@@ -61,5 +72,31 @@
 </section>
 <section id="resultado_busqueda" class="seccion-resultados">
 </section>
+<script>
+    let inputSearch = document.getElementsByName("busqueda");
+    for (let i = 0; i < inputSearch.length; i++) {
+        inputSearch[i].addEventListener('keyup', function(evento){
+            if (evento.which === 13) {
+                if (this.classList.contains('normal')) {
+                    realizarBusqueda('busqueda');
+                } else {
+                    busquedaAvanzada('busqueda');
+                }
+            }
+        });
+    }
+    let btnAdvancedSearch = document.getElementById("btn-advanced-search");
+    let btnNormalSearch = document.getElementById("btn-normal-search");
+    if (btnAdvancedSearch != null) {
+        btnAdvancedSearch.addEventListener('click', function(){
+            busquedaAvanzada('busqueda');
+        });
+    }
+    if (btnNormalSearch != null) {
+        btnNormalSearch.addEventListener('click', function(){
+            realizarBusqueda('busqueda');
+        });
+    }
+</script>
 
 

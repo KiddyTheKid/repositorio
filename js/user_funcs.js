@@ -1,7 +1,23 @@
 var textoBusqueda, searchMode, resultadoContainer;
 
+function crearTarjeta(info) {
+    let a = document.createElement('a');
+    a.href = `../repoFiles/${info.ruta}`;
+    a.target = "_blank";
+    a.style = "text-decoration: none; color: black;";
+    let divCard = document.createElement('div');
+    divCard.classList.add('card');
+    let divCardBody = document.createElement("div");
+    divCardBody.classList.add('card-body');
+    divCardBody.innerHTML = `<div><strong>${info.tema}</strong></div><div>Por: ${info.autor}</div><div>Tipo: ${info.tipo_doc}</div>`;
+    divCardBody.innerHTML += `<div>Carrera: ${info.especialidad}</div><div>Fecha: ${info.fecha_subida}</div>`;
+    divCard.appendChild(divCardBody);
+    a.appendChild(divCard);
+    return a;
+}
 
-function realizarBusqueda(campoTexto) {
+function realizarBusqueda(campoTextoParam) {
+    let campoTexto = document.getElementsByName(campoTextoParam)[1];
 	var message = {
 		busqueda: campoTexto.value,
 		op: 0
@@ -11,15 +27,24 @@ function realizarBusqueda(campoTexto) {
         url: 'core/php/funcs/user_funcs.php',
         data: message,
         success: function (data) {
-            resultadoContainer.html(data);
+            console.log(data);
+            if (data.length < 1) {
+                resultadoContainer.innerHTML = "<h3>No hay resultados</h3>";
+                return;
+            }
+            resultadoContainer.innerHTML = "";
+            data.forEach(function(info){
+                resultadoContainer.appendChild(crearTarjeta(info));
+            });
         }
     });
 }
-function busquedaAvanzada(campoTexto) {
-	var domCarrera = document.getElementById("carrera");
-	var domTipoDoc = document.getElementById("tipo_doc");
-	var domFecha = document.getElementById("fecha");
-	var message = {
+function busquedaAvanzada(campoTextoParam) {
+    let campoTexto = document.getElementsByName(campoTextoParam)[0];
+	let domCarrera = document.getElementById("carrera");
+	let domTipoDoc = document.getElementById("tipo_doc");
+	let domFecha = document.getElementById("fecha");
+	let message = {
 		busqueda: campoTexto.value,
 		carrera: domCarrera.value,
 		tipo_doc: domTipoDoc.value,
@@ -31,7 +56,15 @@ function busquedaAvanzada(campoTexto) {
         url: 'core/php/funcs/user_funcs.php',
         data: message,
         success: function (data) {
-            resultadoContainer.html(data);
+            console.log(data);
+            resultadoContainer.innerHTML = "";
+            if (data.length < 1) {
+                resultadoContainer.innerHTML = "<h3>No hay resultados</h3>";
+                return;
+            }
+            data.forEach(function(info){
+                resultadoContainer.appendChild(crearTarjeta(info));
+            });
         }
     });
 
@@ -39,16 +72,13 @@ function busquedaAvanzada(campoTexto) {
 
 window.onload = function () {
     textoBusqueda = document.getElementsByName("busqueda");
-    textoBusqueda[0].addEventListener("keypress",function(e){
-        if (e.keyCode == 13) {
-            busquedaAvanzada(this);
-        }
-    });
-    textoBusqueda[1].addEventListener("keypress", function(e){
-        if (e.keyCode == 13) {
-            realizarBusqueda(this);
-        }
-    });
+    for (let i = 0; i < textoBusqueda.length; i++) {
+        textoBusqueda[i].addEventListener('keypress', function (evento) {
+           if (this.key === 13){
+               evento.preventDefault();
+           }
+        });
+    }
     searchMode = {
         normalMode: $("#busquedaNormal"),
         advanceMode: $("#busquedaAvanzada"),
@@ -67,5 +97,6 @@ window.onload = function () {
             searchMode.isAdvanced = !searchMode.isAdvanced;
         });
     });
-    resultadoContainer = $("#resultado_busqueda");
+    //resultadoContainer = $("#resultado_busqueda");
+    resultadoContainer = document.getElementById("resultado_busqueda");
 }

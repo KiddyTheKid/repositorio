@@ -32,3 +32,6 @@ a[class=dropdown-item] {
     cursor: pointer;
 }
 
+.container {
+	margin-top: 20px;
+}
