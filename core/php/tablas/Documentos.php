@@ -18,12 +18,33 @@ class Documentos{
      * Buscar documentos de cualquier forma
      * @param Documentos $sDoc
      */
-    public static function buscarDocumento($sDoc) {
-        $sql = "CALL buscar_documento('%s', %s, %s, %s);";
-        $sql = sprintf($sql, $sDoc->tema,
-            $sDoc->especialidad == null ? "NULL" : $sDoc->especialidad,
-                $sDoc->tipo_doc == null ? "NULL" : $sDoc->tipo_doc,
-                $sDoc->fecha_subida == null ? "NULL" : $sDoc->fecha_subida);
+    public static function buscarDocumento($sDoc)
+    {
+        $sDoc->especialidad = Database::Sanar($sDoc->especialidad);
+        $sDoc->tipo_doc = Database::Sanar($sDoc->tipo_doc);
+        $sDoc->fecha_subida = Database::Sanar($sDoc->fecha_subida);
+
+        $params = "";
+        $params .= Parametros::agregarParametro($sDoc->especialidad,
+            "doc.especialidad");
+        $params .= Parametros::agregarParametro($sDoc->tipo_doc,
+            "doc.tipo_doc");
+        $params .= Parametros::agregarParametro($sDoc->fecha_subida,
+            "doc.fecha_subida");
+
+        $sql = "SELECT
+        concat(aut.nombres, ' ', aut.apellidos),
+        doc.tema, doc.fecha_subida, doc.ruta,
+        tp.descripcion, c.descripcion
+        FROM documentos as doc
+        INNER JOIN autores as aut
+        ON doc.autor = aut.cedula
+        INNER JOIN tipos_documentos as tp
+        ON doc.tipo_doc = tp.id
+        INNER JOIN carreras AS c
+        ON doc.especialidad = c.id
+        WHERE MATCH (doc.tema, doc.etiquetas)
+        AGAINST ('$sDoc->tema' IN NATURAL LANGUAGE MODE) $params";
         $resultado = Database::Execute($sql);
         $resps = [];
         while ($row = $resultado->fetch_row())
