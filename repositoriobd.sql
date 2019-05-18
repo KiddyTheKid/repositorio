@@ -1,3 +1,127 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 18-05-2019 a las 07:06:26
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `repositoriobd`
+--
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_documento` (IN `P_TEMA` TEXT, IN `P_ESPECIALIDAD` INT, IN `P_TIPO_DOC` INT, IN `P_FECHA_SUBIDA` DATETIME)  BEGIN
+  CASE
+    WHEN -- 000
+        P_ESPECIALIDAD IS NULL AND
+        P_TIPO_DOC IS NULL AND
+        P_FECHA_SUBIDA IS NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE);
+    WHEN -- 100
+        P_ESPECIALIDAD IS NOT NULL AND
+        P_TIPO_DOC IS NULL AND
+        P_FECHA_SUBIDA IS NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE) AND
+            doc.especialidad = P_ESPECIALIDAD;
+    WHEN -- 010
+        P_ESPECIALIDAD IS NULL AND
+        P_TIPO_DOC IS NOT NULL AND
+        P_FECHA_SUBIDA IS NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE) AND
+            doc.tipo_doc = P_TIPO_DOC;
+    WHEN -- 001
+        P_ESPECIALIDAD IS NULL AND
+        P_TIPO_DOC IS NULL AND
+        P_FECHA_SUBIDA IS NOT NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE) AND
+            YEAR(doc.fecha_subida) = YEAR(P_FECHA_SUBIDA) AND MONTH(doc.fecha_subida) = MONTH(P_FECHA_SUBIDA);
+    WHEN -- 110
+        P_ESPECIALIDAD IS NOT NULL AND
+        P_TIPO_DOC IS NOT NULL AND
+        P_FECHA_SUBIDA IS NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE) AND
+            doc.especialidad = P_ESPECIALIDAD AND doc.tipo_doc = P_TIPO_DOC;
+    WHEN -- 111
+        P_ESPECIALIDAD IS NOT NULL AND
+        P_TIPO_DOC IS NOT NULL AND
+        P_FECHA_SUBIDA IS NOT NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE) AND
+            doc.especialidad = P_ESPECIALIDAD AND doc.tipo_doc = P_TIPO_DOC AND
+            YEAR(doc.fecha_subida) = YEAR(P_FECHA_SUBIDA) AND MONTH(doc.fecha_subida) = MONTH(P_FECHA_SUBIDA);
+    WHEN -- 011
+        P_ESPECIALIDAD IS NULL AND
+        P_TIPO_DOC IS NOT NULL AND
+        P_FECHA_SUBIDA IS NOT NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE) AND
+            doc.tipo_doc = P_TIPO_DOC AND
+            YEAR(doc.fecha_subida) = YEAR(P_FECHA_SUBIDA) AND MONTH(doc.fecha_subida) = MONTH(P_FECHA_SUBIDA);
+    WHEN -- 101
+        P_ESPECIALIDAD IS NOT NULL AND
+        P_TIPO_DOC IS NULL AND
+        P_FECHA_SUBIDA IS NOT NULL
+      THEN
+        SELECT CONCAT(aut.nombres, ' ', aut.apellidos), doc.tema, doc.fecha_subida, doc.ruta, tp.descripcion, c.descripcion FROM documentos AS doc
+                        INNER JOIN autores AS aut ON doc.autor = aut.cedula
+                        INNER JOIN tipos_documentos AS tp ON doc.tipo_doc = tp.id
+                        INNER JOIN carreras AS c ON doc.especialidad = c.id
+        WHERE MATCH(doc.tema, doc.etiquetas) AGAINST (P_TEMA IN NATURAL LANGUAGE MODE) AND
+            doc.especialidad = P_ESPECIALIDAD AND YEAR(doc.fecha_subida) = YEAR(P_FECHA_SUBIDA) AND MONTH(doc.fecha_subida) = MONTH(P_FECHA_SUBIDA);
+    END CASE;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -57,13 +181,6 @@ CREATE TABLE `documentos` (
   `metaetiquetas` text,
   `ruta` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `documentos`
---
-
-INSERT INTO `documentos` (`id`, `tema`, `autor`, `tipo_doc`, `especialidad`, `fecha_subida`, `etiquetas`, `metaetiquetas`, `ruta`) VALUES
-(1, 'Pues el tema', '0931484620', 2, 2, '2019-03-21 23:04:06', 'Pedro  Acosta  Pues  el  tema  arboles  ecologia', 'Pedro  Acosta  Pues  el  tema  arboles  ecologia', 'Administracion/Investigacion/0931484620/Discret Propability.pdf');
 
 -- --------------------------------------------------------
 
@@ -164,7 +281,7 @@ ALTER TABLE `carreras`
 -- AUTO_INCREMENT de la tabla `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_documentos`
