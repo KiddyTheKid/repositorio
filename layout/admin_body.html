@@ -4,6 +4,47 @@
 <script src="js/Modelos/carrera.js"></script>
 <script src="js/Modelos/documentos.js"></script>
 <script src="js/admin_funcs.js"></script>
+<style>
+    .loader-screen {
+        position: absolute;
+        background-color: #80808099;
+        z-index: 10;
+        height: 100vh;
+        width: 100vw;
+    }
+    .loader-screen > div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+<script>
+    function iniciarLoader() {
+        document.getElementById("spinner").classList.add('loader-screen');
+    }
+    function terminarLoader() {
+        document.getElementById("spinner").classList.remove('loader-screen');
+    }
+</script>
+<div id="spinner">
+    <div></div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="#">
         <img src="im/logo.png" width="330" height="100" 

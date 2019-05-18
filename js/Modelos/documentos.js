@@ -33,6 +33,7 @@ class Documento{
 		if (file.length === 0){
 			alert("No hay archivo para subir");
 		} else {
+			iniciarLoader();
 			let formData = new FormData();
 			formData.append("archivo", file[0]);
 			$.each(form.serializeArray(), function (key, input){
@@ -45,6 +46,7 @@ class Documento{
 				contentType: false,
 				processData: false,
 				success: function (data){
+					terminarLoader();
 					Documento.getTabla(0);
 					form[0].reset();
 					$("#archivoC").val("");
@@ -55,6 +57,7 @@ class Documento{
 		
 	}
 	static editar(){
+		iniciarLoader();
 		let form = $("#edit_documento_form");
 		let file = $("#archivoE")[0].files;
 		let formData = new FormData();
@@ -73,6 +76,7 @@ class Documento{
 				form[0].reset();
 				$("#archivoE").val("");
 				$("#mensajes").html(data);
+				terminarLoader();
 			}
 		});
 	}
